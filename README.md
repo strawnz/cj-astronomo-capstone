@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# Project Title
+Pre-Event Planner (PEP)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+Pre-Event Planner (PEP) is an itinerary builder that transforms planning chaos into coordinated elegance, ensuring patrons reach their live events seamlessly. 
 
-## Available Scripts
+### Problem
 
-In the project directory, you can run:
+Planning the journey to a live event such as a concert, theatre show or sports game, can become a time-consuming endeavour in trying to answer questions like: What's the fastest way to get there? What are my transportation options? Is there parking nearby? Where should I eat? This can become even more challenging when a patron is travelling to an unfamiliar area and has to do ample research beforehand.
 
-### `npm start`
+### User Profile
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Live event enthusiasts:
+    - seeking a streamlined solution for efficient pre-event planning
+    - who prefer a centralized platform for mapping out their event-related logistics
+    - desiring a hassle-free experience by consolidating event-related information
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Features
 
-### `npm test`
+- As a user, I want to be able to map my route from any given location to the event venue based on my desired arrival time 
+- As a user, I want the flexibility to choose my preferred mode(s) of transportation to the venue, whether it's driving, public transit, walking or biking
+- As a user, I want to be able to consider parking options if I choose to drive within a 1.6km or 1-mile radius of the venue
+- As a user, I want to be able to select a parking lot from the options if I choose to drive and add it to the itinerary
+- As a user, I want to be able to search for restaurant options if I want to eat before the event within a 1.6km or 1-mile radius of the venue
+- As a user, I want to be able to select a restaurant from the options if I want to eat before the event and add it to the itinerary
+- As a user, I want to be able to dynamically calculate the total distance and time required for the entire journey, factoring in all selected pre-event locations
+- As a user, I want to be able to receive a detailed itinerary that includes transportation details, parking information (if needed), selected restaurant, and estimated arrival times at each location **
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Implementation
 
-### `npm run build`
+### Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- Express (TBD)
+- Client libraries:
+    - react
+    - react-router-dom
+    - axios
+    - sass
+- Server libraries (TBD):
+    - express
+    - nodemon
+    - cors
+    - dotenv
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### APIs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- This project will use the Google Maps Platform API
 
-### `npm run eject`
+### Sitemap
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Home page
+- Build itinerary form
+- Parking options
+- Restaurant options 
+- Completed itinerary
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Mockups 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Home Page
+![handdrawn mockup of homepage](/assets/HomePage.jpg)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Build Itinerary Form Page
+![handdrawn mockup of build itinerary form page](/assets/BuildItineraryForm.jpg)
 
-## Learn More
+#### Parking Options Page
+![handdrawn mockup of parking options page](/assets/ParkingOptions.jpg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Restaurant Options Page
+![handdrawn mockup of restaurant options page](/assets/RestaurantOptions.jpg)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Completed Itinerary Page
+![handdrawn mockup of completed itinerary page](/assets/CompletedItinerary.jpg)
 
-### Code Splitting
+### Data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+I'm not sure at this time if I'll use a database for the first version of this project.
+I have an idea that I'm going to list in the nice-to-haves. Open to discussing further.
 
-### Analyzing the Bundle Size
+### Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Currently N/A for the first version of this project
 
-### Making a Progressive Web App
+### Auth
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Currently N/A for the first version of this project
 
-### Advanced Configuration
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Create client
+    - react project with routes and boilerplate pages
 
-### Deployment
+- Test Google Maps API(s)
+    - read documentation and test APIs in Postman
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Set up global styles, mixins, variables, and typography
 
-### `npm run build` fails to minify
+- Feature: Home Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Feature: Build Itinerary Form Page
+    - Add form input
+    - Create optional route to Parking Options page
+    - Create optional route to Restaurant Options page
+
+- Feature: Parking Options Page
+    - Add form selection
+    - Create optional route to Restaurant Options page
+
+- Feature: Restaurant Options Page
+    - Add form selection
+
+- Feature: Completed Itinerary Page
+    - Output results from user selection
+
+- Bug fixes
+
+- In-Class Presentations
+
+- Final tweaks
+
+- DEMO DAY
+
+## Nice-to-haves
+
+- Create animated Loading Page before navigating to the Completed Itinerary Page
+- Sync itinerary to a user's calendar 
+- Ability to share itinerary with other people's calendars or via a link
+- Ability to save restaurant and parking lot options for future reference
+- Integrate a weather app widget
