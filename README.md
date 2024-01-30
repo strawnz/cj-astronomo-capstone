@@ -58,24 +58,23 @@ Planning the journey to a live event such as a concert, theatre show or sports g
 ### Mockups 
 
 #### Home Page
-![handdrawn mockup of homepage](/assets/HomePage.jpg)
+![handdrawn mockup of homepage](/assets/readme/HomePage.jpg)
 
 #### Build Itinerary Form Page
-![handdrawn mockup of build itinerary form page](/assets/BuildItineraryForm.jpg)
+![handdrawn mockup of build itinerary form page](/assets/readme/BuildItineraryForm.jpg)
 
 #### Parking Options Page
-![handdrawn mockup of parking options page](/assets/ParkingOptions.jpg)
+![handdrawn mockup of parking options page](/assets/readme/ParkingOptions.jpg)
 
 #### Restaurant Options Page
-![handdrawn mockup of restaurant options page](/assets/RestaurantOptions.jpg)
+![handdrawn mockup of restaurant options page](/assets/readme/RestaurantOptions.jpg)
 
 #### Completed Itinerary Page
-![handdrawn mockup of completed itinerary page](/assets/CompletedItinerary.jpg)
+![handdrawn mockup of completed itinerary page](/assets/readme/CompletedItinerary.jpg)
 
 ### Data
 
-I'm not sure at this time if I'll use a database for the first version of this project.
-I have an idea that I'm going to list in the nice-to-haves. Open to discussing further.
+Currently N/A for the first version of this project
 
 ### Endpoints
 
