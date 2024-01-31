@@ -1,8 +1,11 @@
 import './HomePage.scss';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
     return (
-        <h1>Home Page Placeholder</h1>
+        <main>
+            <h1>Home Page Placeholder</h1>
+        </main>
     )
 };
 

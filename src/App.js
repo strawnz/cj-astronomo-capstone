@@ -6,10 +6,12 @@ import ParkingPage from './pages/ParkingPage/ParkingPage';
 import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import CompletedItineraryPage from './pages/CompletedItineraryPage/CompletedItineraryPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import Header from './components/Header/Header';
 
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/form' element={<ItineraryFormPage />}/>

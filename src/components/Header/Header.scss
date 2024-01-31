@@ -1,0 +1,14 @@
+@use '../../styles/partials/global.scss' as *;
+
+.header {
+    background-color: $logo-blue;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    &__white {
+        width: 100%;
+    }
+}
