@@ -1,12 +1,14 @@
 import './Header.scss';
 import { Link } from 'react-router-dom';
-import logoWhite from '../../assets/logo/white_transparent.svg';
+import logoGrey from '../../assets/logo/grey_transparent.svg';
 
 function Header() {
     return (
         <>
         <header className='header'>
-            <img src={logoWhite} className='logo__white' alt='logo in white'/>
+            <Link to="/" >
+                <img src={logoGrey} className='logo__grey' alt='logo in grey'/>
+            </Link>
         </header>
         </>
     )

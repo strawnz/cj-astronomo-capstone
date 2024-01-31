@@ -1,1 +1,46 @@
 @use '../../styles/partials/global.scss' as *;
+
+.main {
+    background-color: $background-grey;
+    color: $text-grey;
+    position: relative;
+}
+
+.hero {
+    &__container {
+        height: 80vh;
+        position: relative;
+    }
+
+    &__concert {
+        background-image: url(../../assets/images/concert2.JPG);
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 27vh;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+    }
+
+    &__sports {
+        background-image: url(../../assets/images/raptors.png);
+        background-position: bottom;
+        background-size: cover;
+        width: 100%;
+        height: 33vh;
+        position: absolute;
+        top: 20vh;
+        z-index: 1;
+    }
+
+    &__theatre {
+        background-image: url(../../assets/images/theatre.jpg);
+        background-position: bottom;
+        background-size: cover;
+        width: 100%;
+        height: 33vh;
+        position: absolute;
+        top: 48vh;
+    }
+}
