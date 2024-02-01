@@ -58,19 +58,19 @@ Planning the journey to a live event such as a concert, theatre show or sports g
 ### Mockups 
 
 #### Home Page
-![handdrawn mockup of homepage](/assets/readme/HomePage.jpg)
+![handdrawn mockup of homepage](/cj-astronomo-capstone/src/assets/readme/HomePage.jpg)
 
 #### Build Itinerary Form Page
-![handdrawn mockup of build itinerary form page](/assets/readme/BuildItineraryForm.jpg)
+![handdrawn mockup of build itinerary form page](/cj-astronomo-capstone/src/assets/readme/BuildItineraryForm.jpg)
 
 #### Parking Options Page
-![handdrawn mockup of parking options page](/assets/readme/ParkingOptions.jpg)
+![handdrawn mockup of parking options page](/cj-astronomo-capstone/src/assets/readme/ParkingOptions.jpg)
 
 #### Restaurant Options Page
-![handdrawn mockup of restaurant options page](/assets/readme/RestaurantOptions.jpg)
+![handdrawn mockup of restaurant options page](/cj-astronomo-capstone/src/assets/readme/RestaurantOptions.jpg)
 
 #### Completed Itinerary Page
-![handdrawn mockup of completed itinerary page](/assets/readme/CompletedItinerary.jpg)
+![handdrawn mockup of completed itinerary page](/cj-astronomo-capstone/src/assets/readme/CompletedItinerary.jpg)
 
 ### Data
 

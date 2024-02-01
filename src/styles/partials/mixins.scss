@@ -21,3 +21,27 @@
     display: flex;
     flex-direction: column;
 }
+
+@mixin page-header {
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+}
+
+@mixin body {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+@mixin body-sm {
+    font-size: 0.7rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+}
+
+@mixin links-buttons {
+    font-weight: 800;
+    font-size: 13.25px;
+    line-height: 1.25rem;
+    letter-spacing: 0.1rem;
+}
