@@ -1,6 +1,11 @@
 import './ItineraryFormPage.scss';
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function ItineraryFormPage() {
+    const [startDate, setStartDate] = useState(new Date());
+
     return (
         <main className='main'>
             <section className='form__header-container'>
@@ -35,6 +40,21 @@ function ItineraryFormPage() {
                                 <option value='Elgin Winter Garden'>The Elgin & Winter Garden Theatre Centre</option>
                             </select>
                         </div>                   
+                    </article>
+                    <article className='date-picker__container'>
+                        <div>
+                            <label>
+                                What is the date of your event?
+                            </label>
+                        </div> 
+                        <div className='date-picker__widget-container'>
+                            <DatePicker 
+                                className='date-picker__widget'
+                                defaultValue={startDate}
+                                selected={startDate}
+                                onChange={date => setStartDate(date)}
+                            />
+                        </div>
                     </article>
                 </form>
             </section>
