@@ -7,6 +7,7 @@ import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import CompletedItineraryPage from './pages/CompletedItineraryPage/CompletedItineraryPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/completed' element={<CompletedItineraryPage />}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
