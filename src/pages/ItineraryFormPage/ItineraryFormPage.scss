@@ -57,6 +57,10 @@
 }
 
 .time-picker {
+    &__container {
+        margin-bottom: 1rem;
+    }
+
     &__widget {
         width: 100%;
 
@@ -68,5 +72,19 @@
             width: 20%;
             text-align: center;
         }
+    }
+}
+
+.radio-group {
+    &__parking-container {
+        margin-bottom: 1rem;
+    }
+
+    &__restaurant-container {
+        margin-bottom: 1rem;
+    }
+
+    &__price-container {
+        margin-bottom: 1rem;
     }
 }

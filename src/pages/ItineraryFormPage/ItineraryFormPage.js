@@ -9,6 +9,8 @@ import 'react-clock/dist/Clock.css';
 function ItineraryFormPage() {
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
+    const [parkingChoice, setParkingChoice] = useState('');
+    const [eatChoice, setEatChoice] = useState('');
 
     return (
         <main className='main'>
@@ -63,7 +65,7 @@ function ItineraryFormPage() {
                     <article className='time-picker__container'>
                         <div>
                             <label>
-                                What time do you want to arrive at the venue?
+                                What is your preferred time to arrive at the venue?
                             </label>
                         </div>
                         <div className='time-picker__widget-container'>
@@ -79,6 +81,94 @@ function ItineraryFormPage() {
                             />
                         </div>
                     </article>
+                    <article className='radio-group__parking-container'>
+                        <div>
+                            <p>Would you like to park near the venue?</p>
+                        </div>
+                        <div>
+                            <label>
+                            <input
+                                className='radio-group__parking-yes'
+                                type='radio'
+                                id='yes'
+                                name='parking-choice'
+                            />
+                            Yes
+                            </label>
+                            <label>
+                            <input
+                                className='radio-group__parking-no'
+                                type='radio'
+                                id='no'
+                                name='parking-choice'
+                            />
+                            No
+                            </label>
+                        </div>
+                    </article>
+                    <article className='radio-group__restaurant-container'>
+                        <div>
+                            <p>Would you like to eat near the venue?</p>
+                        </div>
+                        <div>
+                            <label>
+                            <input
+                                className='radio-group__resto-yes'
+                                type='radio'
+                                id='yes'
+                                name='resto-choice'
+                                onChange={() => setEatChoice('yes')}
+                            />
+                            Yes
+                            </label>
+                            <label>
+                            <input
+                                className='radio-group__resto-no'
+                                type='radio'
+                                id='no'
+                                name='resto-choice'
+                                onChange={() => setEatChoice('no')}
+                            />
+                            No
+                            </label>
+                        </div>
+                    </article>
+                    {eatChoice === 'yes' && (
+                        <article className='radio-group__price-container'>
+                            <div>
+                                <p>What is your preferred price range for eating at a restaurant?</p>
+                            </div>
+                            <div>
+                                <label>
+                                <input
+                                    className='radio-group__price-1'
+                                    type='radio'
+                                    id='price-1'
+                                    name='price-choice'
+                                />
+                                $
+                                </label>
+                                <label>
+                                <input
+                                    className='radio-group__price-2'
+                                    type='radio'
+                                    id='price-2'
+                                    name='price-choice'
+                                />
+                                $$
+                                </label>
+                                <label>
+                                <input
+                                    className='radio-group__price-3'
+                                    type='radio'
+                                    id='price-3'
+                                    name='price-choice'
+                                />
+                                $$$
+                                </label>
+                            </div>
+                        </article>
+                    )}
                 </form>
             </section>
         </main>
