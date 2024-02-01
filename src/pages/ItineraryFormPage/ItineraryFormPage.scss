@@ -1,1 +1,32 @@
 @use '../../styles/partials/global.scss' as *;
+
+.form {
+    &__header-container {
+        padding: 1.25rem 1rem;
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+
+    &__container {
+        padding: 1.25rem 1rem;
+    }
+
+    &__venue-container {
+        @include flex-column;
+    }
+}
+
+.venue-list {
+    &__drop-down {
+        width: 100%;
+        height: 2rem;
+        display: block;
+    }
+}

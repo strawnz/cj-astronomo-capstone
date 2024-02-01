@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
     return (
-        <main class='main'>
+        <main className='main'>
             <section className='hero__container'> 
                 <div className='hero__concert'></div>
                 <div className='hero__sports'></div>
