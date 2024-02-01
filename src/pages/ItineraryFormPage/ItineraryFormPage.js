@@ -2,9 +2,13 @@ import './ItineraryFormPage.scss';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import TimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
 
 function ItineraryFormPage() {
     const [startDate, setStartDate] = useState(new Date());
+    const [time, setTime] = useState('12:00');
 
     return (
         <main className='main'>
@@ -53,6 +57,25 @@ function ItineraryFormPage() {
                                 defaultValue={startDate}
                                 selected={startDate}
                                 onChange={date => setStartDate(date)}
+                            />
+                        </div>
+                    </article>
+                    <article className='time-picker__container'>
+                        <div>
+                            <label>
+                                What time do you want to arrive at the venue?
+                            </label>
+                        </div>
+                        <div className='time-picker__widget-container'>
+                            <TimePicker 
+                                className='time-picker__widget'
+                                value={time}
+                                onChange={setTime}
+                                clockIcon={null}
+                                hourPlaceholder='hh'
+                                minutePlaceholder='mm'
+                                format='h:mm a'
+                                disableClock={true}
                             />
                         </div>
                     </article>
