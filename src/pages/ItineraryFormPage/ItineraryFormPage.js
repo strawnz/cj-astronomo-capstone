@@ -169,6 +169,11 @@ function ItineraryFormPage() {
                             </div>
                         </article>
                     )}
+                    <div>
+                        <button>
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </section>
         </main>
