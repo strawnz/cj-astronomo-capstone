@@ -10,6 +10,7 @@ function ParkingPage() {
     const venueName = searchParams.get('venueName');
     console.log(venueName);
     const [parkingOptions, setParkingOptions] = useState([]);
+    const [selectedParkingId, setSelectedParkingId] = useState(null);
 
     useEffect(() => {
         const fetchParkingOptions = async () => {
@@ -27,6 +28,23 @@ function ParkingPage() {
         }
     }, [venueId]);
 
+    const handleParkingSelection = (parkingId) => {
+        setSelectedParkingId(parkingId);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            await axios.post('', {
+                venueId,
+                selectedParkingId,
+            })
+        } catch (error) {
+            console.log("Error submitted parking choice: ", error);
+        }
+    }
+
     return (
         <main className='main'>
             <section className='parking__header-container'>
@@ -36,9 +54,13 @@ function ParkingPage() {
                 </h2>
             </section>
             <section>
-                <form>
+                <form onSubmit={handleSubmit}>
                     {parkingOptions.map((parking) => (
-                        <article className='park-card' key={parking.id}>
+                        <article 
+                            className='park-card' 
+                            key={parking.id}
+                            onClick={() => handleParkingSelection(parking.id)}
+                        >
                             <h3 className='park-card__address'>{parking.address}</h3>
                             <div className='park-card__distance'>
                                 <h4 className='park-card__card-header'>
