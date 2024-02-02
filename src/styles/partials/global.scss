@@ -12,6 +12,7 @@
 body {
     font-family: 'Raleway', Arial, Helvetica, sans-serif;
     @include no-margin-padding;
+    background-color: $background-grey;
     color: $text-grey;
 }
 

@@ -11,11 +11,11 @@ function HomePage() {
             </section>
             <section className='home__container'>
                 <h1 className='home__header'>Pre-Event Planner</h1>
-                <p class='home__body'>
+                <p className='home__body'>
                     Ready to transform your journey to a live event 
                     from chaos to coordinated elegance?
                 </p>                
-                <p class='home__body'>
+                <p className='home__body'>
                     Your path to unforgettable moments begins here.
                     Click below to 'PEP' up your itinerary!
                 </p>
