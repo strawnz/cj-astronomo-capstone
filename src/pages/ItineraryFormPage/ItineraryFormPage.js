@@ -85,7 +85,7 @@ function ItineraryFormPage() {
             const venueId = venueIdResponse.data.id;
 
             if (parkingChoice === 'yes') {
-                toParking(`/parking?venueId=${venueId}`);
+                toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
             } else {
                 toRestaurants(`/restaurants?venueId=${venueId}`);
             };
