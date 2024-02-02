@@ -16,6 +16,9 @@ function ItineraryFormPage() {
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
 
+    const toParking = useNavigate();
+    const toRestaurants = useNavigate();
+
     const changeVenue = (event) => {
         setVenue(event.target.value);
     };
@@ -79,6 +82,12 @@ function ItineraryFormPage() {
         } catch (error) {
             console.log("Form submission error: ", error);
         }
+
+        if (parkingChoice === 'yes') {
+            toParking("/parking");
+        } else {
+            toRestaurants("/restaurants");
+        };
     };
 
     return (
@@ -100,12 +109,12 @@ function ItineraryFormPage() {
                         <div>
                             <select
                                 onChange={changeVenue}
-                                value={venue}
+                                defaultValue=''
                                 name='venue-list' 
                                 id='venue-list'
                                 className='venue-list__drop-down'
                             >
-                                <option value='Please select a venue' disabled>
+                                <option value='' disabled>
                                     Please select a venue
                                 </option>
                                 <option value='BMO Field'>BMO Field</option>
