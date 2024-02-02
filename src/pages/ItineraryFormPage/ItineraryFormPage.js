@@ -41,7 +41,7 @@ function ItineraryFormPage() {
                 "http://localhost:8080/api/forms",
                 newForm
                 );
-                console.log(response.data);
+                console.log(response.data); // remove this eventually
                 return response;
         } catch (error) {
             console.log("Error posting form: ", error);
@@ -52,9 +52,24 @@ function ItineraryFormPage() {
         event.preventDefault();
 
         try {
+            const formattedDate = startDate.toLocaleDateString('en-CA', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+            });
+
+            const formattedTime = startDate.toLocaleTimeString('en-CA', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+            });
+
+            const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
             const newFormData = {
                 venue_name: venue,
-                event_date: startDate,
+                event_date: formattedDateTime,
                 preferred_time: time,
                 option_parking: parkingChoice,
                 option_restaurant: eatChoice,
@@ -90,7 +105,7 @@ function ItineraryFormPage() {
                                 id='venue-list'
                                 className='venue-list__drop-down'
                             >
-                                <option value='' disabled selected>
+                                <option value='Please select a venue' disabled>
                                     Please select a venue
                                 </option>
                                 <option value='BMO Field'>BMO Field</option>
@@ -151,6 +166,7 @@ function ItineraryFormPage() {
                                 className='radio-group__parking-yes'
                                 type='radio'
                                 id='yes'
+                                value='yes'
                                 name='parking-choice'
                             />
                             Yes
@@ -161,6 +177,7 @@ function ItineraryFormPage() {
                                 className='radio-group__parking-no'
                                 type='radio'
                                 id='no'
+                                value='no'
                                 name='parking-choice'
                             />
                             No
