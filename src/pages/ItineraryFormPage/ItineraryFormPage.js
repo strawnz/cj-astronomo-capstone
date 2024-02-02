@@ -1,5 +1,7 @@
 import './ItineraryFormPage.scss';
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom'
+import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-time-picker';
@@ -7,10 +9,62 @@ import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 
 function ItineraryFormPage() {
+    const [venue, setVenue] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
     const [parkingChoice, setParkingChoice] = useState('');
     const [eatChoice, setEatChoice] = useState('');
+    const [priceChoice, setPriceChoice] = useState('');
+
+    const changeVenue = (event) => {
+        setVenue(event.target.value);
+    };
+    const changeDate = (date) => {
+        setStartDate(date);
+    };
+    const changeTime = (time) => {
+        setTime(time);
+    };
+    const changeParking = (event) => {
+        setParkingChoice(event.target.value);
+    };
+    const changeEat = (event) => {
+        setEatChoice(event.target.value);
+    };
+    const changePrice = (event) => {
+        setPriceChoice(event.target.value);
+    };
+
+    const postNewForm = async (newForm) => {
+        try {
+            const response = await axios.post(
+                "http://localhost:8080/api/forms",
+                newForm
+                );
+                console.log(response.data);
+                return response;
+        } catch (error) {
+            console.log("Error posting form: ", error);
+        }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const newFormData = {
+                venue_name: venue,
+                event_date: startDate,
+                preferred_time: time,
+                option_parking: parkingChoice,
+                option_restaurant: eatChoice,
+                option_price: priceChoice,
+            }
+            await postNewForm(newFormData);
+        } catch (error) {
+            console.log("Form submission error: ", error);
+        }
+    };
 
     return (
         <main className='main'>
@@ -21,7 +75,7 @@ function ItineraryFormPage() {
                 </h2>
             </section>
             <section className='form__container'>
-                <form>
+                <form onSubmit={handleSubmit}> 
                     <article className='form__venue-container'>
                         <div>
                             <label>
@@ -29,8 +83,13 @@ function ItineraryFormPage() {
                             </label>
                         </div>     
                         <div>
-                            <select name='venue-list' id='venue-list'
-                            className='venue-list__drop-down'>
+                            <select
+                                onChange={changeVenue}
+                                value={venue}
+                                name='venue-list' 
+                                id='venue-list'
+                                className='venue-list__drop-down'
+                            >
                                 <option value='' disabled selected>
                                     Please select a venue
                                 </option>
@@ -58,7 +117,7 @@ function ItineraryFormPage() {
                                 className='date-picker__widget'
                                 defaultValue={startDate}
                                 selected={startDate}
-                                onChange={date => setStartDate(date)}
+                                onChange={changeDate}
                             />
                         </div>
                     </article>
@@ -72,7 +131,7 @@ function ItineraryFormPage() {
                             <TimePicker 
                                 className='time-picker__widget'
                                 value={time}
-                                onChange={setTime}
+                                onChange={changeTime}
                                 clockIcon={null}
                                 hourPlaceholder='hh'
                                 minutePlaceholder='mm'
@@ -88,6 +147,7 @@ function ItineraryFormPage() {
                         <div>
                             <label>
                             <input
+                                onChange={changeParking}
                                 className='radio-group__parking-yes'
                                 type='radio'
                                 id='yes'
@@ -97,6 +157,7 @@ function ItineraryFormPage() {
                             </label>
                             <label>
                             <input
+                                onChange={changeParking}
                                 className='radio-group__parking-no'
                                 type='radio'
                                 id='no'
@@ -116,8 +177,9 @@ function ItineraryFormPage() {
                                 className='radio-group__resto-yes'
                                 type='radio'
                                 id='yes'
+                                value='yes'
                                 name='resto-choice'
-                                onChange={() => setEatChoice('yes')}
+                                onChange={changeEat}
                             />
                             Yes
                             </label>
@@ -126,8 +188,9 @@ function ItineraryFormPage() {
                                 className='radio-group__resto-no'
                                 type='radio'
                                 id='no'
+                                value='no'
                                 name='resto-choice'
-                                onChange={() => setEatChoice('no')}
+                                onChange={changeEat}
                             />
                             No
                             </label>
@@ -144,7 +207,9 @@ function ItineraryFormPage() {
                                     className='radio-group__price-1'
                                     type='radio'
                                     id='price-1'
+                                    value='$'
                                     name='price-choice'
+                                    onChange={changePrice}
                                 />
                                 $
                                 </label>
@@ -153,7 +218,9 @@ function ItineraryFormPage() {
                                     className='radio-group__price-2'
                                     type='radio'
                                     id='price-2'
+                                    value='$$'
                                     name='price-choice'
+                                    onChange={changePrice}
                                 />
                                 $$
                                 </label>
@@ -162,7 +229,9 @@ function ItineraryFormPage() {
                                     className='radio-group__price-3'
                                     type='radio'
                                     id='price-3'
+                                    value='$$$'
                                     name='price-choice'
+                                    onChange={changePrice}
                                 />
                                 $$$
                                 </label>
@@ -170,7 +239,7 @@ function ItineraryFormPage() {
                         </article>
                     )}
                     <div>
-                        <button>
+                        <button type="submit">
                             Submit
                         </button>
                     </div>
