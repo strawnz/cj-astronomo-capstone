@@ -1,1 +1,85 @@
 @use '../../styles/partials/global.scss' as *;
+
+.parking {
+    &__header-container {
+        padding: 1.25rem 1rem;
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+
+    &__buttons {
+        padding: 1.25rem 1rem;
+        @include flex-column;
+        align-items: center;
+    }
+
+    &__submit {
+        margin-bottom: 1rem;
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 2rem;
+        background-color: $button-grey;
+        color: $text-blue;
+        border: 1px solid $text-grey;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__submit:hover {
+        background-color: $background-blue;
+        color: $text-grey;
+    }
+
+    &__back {
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 2rem;
+        background-color: $button-grey;
+        color: $text-red;
+        border: 1px solid $background-red;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__back:hover {
+        background-color: $background-red;
+        color: $text-grey;
+        border: 1px solid $text-grey;
+    }
+}
+
+.park-card {
+    margin: 1rem;
+    padding: 1.25rem 1rem;
+    border: 2px solid $text-grey;
+
+    &__address {
+        @include body-lg;
+        margin-bottom: 0.5rem;
+    }
+
+    &__distance {
+        margin-bottom: 0.5rem;
+    }
+
+    &__card-header {
+        @include body-med;
+    }
+
+    &__info {
+        @include body-med;
+    }
+}

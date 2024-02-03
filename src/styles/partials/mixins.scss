@@ -34,7 +34,12 @@
     line-height: 1.5rem;
 }
 
-@mixin body {
+@mixin body-lg {
+    font-size: 0.9375rem;
+    line-height: 1.75rem;
+}
+
+@mixin body-med {
     font-size: 0.875rem;
     line-height: 1.5rem;
 }
@@ -47,7 +52,7 @@
 
 @mixin links-buttons {
     font-weight: 800;
-    font-size: 13.25px;
+    font-size: 0.8281rem;
     line-height: 1.25rem;
     letter-spacing: 0.1rem;
 }

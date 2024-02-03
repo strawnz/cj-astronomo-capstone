@@ -79,15 +79,20 @@ function ItineraryFormPage() {
                 option_price: priceChoice,
             }
             await postNewForm(newFormData);
+
+            const venueIdResponse = await axios.get(`
+                http://localhost:8080/api/venues/${venue}`);
+            const venueId = venueIdResponse.data.id;
+
+            if (parkingChoice === 'yes') {
+                toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
+            } else {
+                toRestaurants(`/restaurants?venueId=${venueId}`);
+            };
+
         } catch (error) {
             console.log("Form submission error: ", error);
         }
-
-        if (parkingChoice === 'yes') {
-            toParking("/parking");
-        } else {
-            toRestaurants("/restaurants");
-        };
     };
 
     return (
