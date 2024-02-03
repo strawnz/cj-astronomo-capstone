@@ -1,9 +1,9 @@
-import './ParkingPage.scss';
+import './Parking.scss';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-function ParkingPage() {
+function Parking() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const venueId = searchParams.get('venueId');
@@ -54,7 +54,7 @@ function ParkingPage() {
                 </h2>
             </section>
             <section>
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}> */}
                     {parkingOptions.map((parking) => (
                         <article 
                             className='park-card' 
@@ -80,10 +80,10 @@ function ParkingPage() {
                         <button type='submit' className='parking__submit'>Submit</button>
                         <button type='' className='parking__back'>Go Back to Form</button>
                     </article>
-                </form>
+                {/* </form> */}
             </section>
         </main>
     )
 };
 
-export default ParkingPage;
+export default Parking;

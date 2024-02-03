@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import Parking from '../../components/Parking/Parking';
 
 function ItineraryFormPage() {
     const [venue, setVenue] = useState('');
@@ -15,20 +16,59 @@ function ItineraryFormPage() {
     const [parkingChoice, setParkingChoice] = useState('');
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
+    const [form, setForm] = useState({});
+    const [parkingId, setParkingId] = useState('');
+    const [restoId, setRestoId] = useState('');
 
     const toParking = useNavigate();
     const toRestaurants = useNavigate();
 
     const changeVenue = (event) => {
-        setVenue(event.target.value);
+        const selectedVenue = event.target.value;
+        setForm((form) => ({
+            ...form,
+            venue_name: selectedVenue,
+        }))
+        console.log(selectedVenue); // remove this eventually
+        setVenue(selectedVenue);
     };
     const changeDate = (date) => {
+        const formattedDate = startDate.toLocaleDateString('en-CA', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+        });
+
+        const formattedTime = startDate.toLocaleTimeString('en-CA', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+        });
+
+        const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+        setForm((form) => ({
+            ...form,
+            event_date: formattedDateTime,
+        }))
+        console.log(date); // remove this eventually
         setStartDate(date);
     };
     const changeTime = (time) => {
+        setForm((form) => ({
+            ...form,
+            preferred_time: time,
+        }))
+        console.log(time); // remove this eventually
         setTime(time);
     };
     const changeParking = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_parking: event.target.value,
+        }))
+        console.log(event.target.value);
         setParkingChoice(event.target.value);
     };
     const changeEat = (event) => {
@@ -36,6 +76,25 @@ function ItineraryFormPage() {
     };
     const changePrice = (event) => {
         setPriceChoice(event.target.value);
+    };
+
+    const getVenueId = async () => {
+        try {
+            const venueIdResponse = await axios.get(`
+            http://localhost:8080/api/venues/${venue}`);
+            return venueIdResponse.data.id;
+        } catch (error) {
+            console.log("Error getting venueId: ", error);
+        }
+    }
+
+    const handleParkingSelection = async (parkingChoice) => {
+        setForm((form) => ({
+            ...form,
+            option_parking: parkingChoice,
+        }));
+        const venueId = await getVenueId();
+        toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
     };
 
     const postNewForm = async (newForm) => {
@@ -55,40 +114,42 @@ function ItineraryFormPage() {
         event.preventDefault();
 
         try {
-            const formattedDate = startDate.toLocaleDateString('en-CA', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-            });
+            // const formattedDate = startDate.toLocaleDateString('en-CA', {
+            //     year: 'numeric',
+            //     month: '2-digit',
+            //     day: '2-digit',
+            // });
 
-            const formattedTime = startDate.toLocaleTimeString('en-CA', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-            });
+            // const formattedTime = startDate.toLocaleTimeString('en-CA', {
+            //     hour: '2-digit',
+            //     minute: '2-digit',
+            //     second: '2-digit',
+            //     hour12: false,
+            // });
 
-            const formattedDateTime = `${formattedDate} ${formattedTime}`;
+            // const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
-            const newFormData = {
-                venue_name: venue,
-                event_date: formattedDateTime,
-                preferred_time: time,
-                option_parking: parkingChoice,
-                option_restaurant: eatChoice,
-                option_price: priceChoice,
-            }
-            await postNewForm(newFormData);
+            // const newFormData = {
+            //     venue_name: venue,
+            //     event_date: formattedDateTime,
+            //     preferred_time: time,
+            //     option_parking: parkingChoice,
+            //     option_restaurant: eatChoice,
+            //     option_price: priceChoice,
+            //     parking_id: parkingId,
+            //     resto_id: restoId,
+            // }
+            await postNewForm(form);
 
-            const venueIdResponse = await axios.get(`
-                http://localhost:8080/api/venues/${venue}`);
-            const venueId = venueIdResponse.data.id;
+            // const venueIdResponse = await axios.get(`
+            //     http://localhost:8080/api/venues/${venue}`);
+            // const venueId = venueIdResponse.data.id;
 
-            if (parkingChoice === 'yes') {
-                toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
-            } else {
-                toRestaurants(`/restaurants?venueId=${venueId}`);
-            };
+            // if (parkingChoice === 'yes') {
+            //     toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
+            // } else {
+            //     toRestaurants(`/restaurants?venueId=${venueId}`);
+            // };
 
         } catch (error) {
             console.log("Form submission error: ", error);
@@ -198,6 +259,9 @@ function ItineraryFormPage() {
                             </label>
                         </div>
                     </article>
+                    {parkingChoice === 'yes' && (
+                            <Parking onSelect={handleParkingSelection} />
+                    )}
                     <article className='radio-group__restaurant-container'>
                         <div>
                             <p>Would you like to eat near the venue?</p>
