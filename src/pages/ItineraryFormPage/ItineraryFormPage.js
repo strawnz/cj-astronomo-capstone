@@ -1,5 +1,5 @@
 import './ItineraryFormPage.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
@@ -10,7 +10,7 @@ import 'react-clock/dist/Clock.css';
 import Parking from '../../components/Parking/Parking';
 
 function ItineraryFormPage() {
-    const [venue, setVenue] = useState('');
+    const [venueName, setVenueName] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
     const [parkingChoice, setParkingChoice] = useState('');
@@ -19,19 +19,37 @@ function ItineraryFormPage() {
     const [form, setForm] = useState({});
     const [parkingId, setParkingId] = useState('');
     const [restoId, setRestoId] = useState('');
+    const [venueId, setVenueId] = useState('');
 
     const toParking = useNavigate();
     const toRestaurants = useNavigate();
 
-    const changeVenue = (event) => {
-        const selectedVenue = event.target.value;
+    const changeVenueName = (event) => {
+        const selectedVenueName = event.target.value;
         setForm((form) => ({
             ...form,
-            venue_name: selectedVenue,
+            venue_name: selectedVenueName,
         }))
-        console.log(selectedVenue); // remove this eventually
-        setVenue(selectedVenue);
+        console.log(selectedVenueName); // remove this eventually
+        setVenueName(selectedVenueName);
     };
+
+    useEffect(() => {
+        const fetchVenueId = async () => {
+            try {
+                const venueIdResponse = await axios.get(`
+                http://localhost:8080/api/venues/name/${venueName}`);
+                console.log("Venue ID Response: ", venueIdResponse.data.id); // remove this eventually
+                setVenueId(venueIdResponse.data.id);
+            } catch (error) {
+                console.log('Unable to retrieve venue Id: ', error);
+            }
+        }
+        if (!venueId && venueName) {
+            fetchVenueId();
+        }
+    }, [venueName]);
+
     const changeDate = (date) => {
         const formattedDate = startDate.toLocaleDateString('en-CA', {
             year: 'numeric',
@@ -78,23 +96,12 @@ function ItineraryFormPage() {
         setPriceChoice(event.target.value);
     };
 
-    const getVenueId = async () => {
-        try {
-            const venueIdResponse = await axios.get(`
-            http://localhost:8080/api/venues/${venue}`);
-            return venueIdResponse.data.id;
-        } catch (error) {
-            console.log("Error getting venueId: ", error);
-        }
-    }
-
     const handleParkingSelection = async (parkingChoice) => {
         setForm((form) => ({
             ...form,
             option_parking: parkingChoice,
         }));
-        const venueId = await getVenueId();
-        toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
+        toParking(`/parking`);
     };
 
     const postNewForm = async (newForm) => {
@@ -114,43 +121,7 @@ function ItineraryFormPage() {
         event.preventDefault();
 
         try {
-            // const formattedDate = startDate.toLocaleDateString('en-CA', {
-            //     year: 'numeric',
-            //     month: '2-digit',
-            //     day: '2-digit',
-            // });
-
-            // const formattedTime = startDate.toLocaleTimeString('en-CA', {
-            //     hour: '2-digit',
-            //     minute: '2-digit',
-            //     second: '2-digit',
-            //     hour12: false,
-            // });
-
-            // const formattedDateTime = `${formattedDate} ${formattedTime}`;
-
-            // const newFormData = {
-            //     venue_name: venue,
-            //     event_date: formattedDateTime,
-            //     preferred_time: time,
-            //     option_parking: parkingChoice,
-            //     option_restaurant: eatChoice,
-            //     option_price: priceChoice,
-            //     parking_id: parkingId,
-            //     resto_id: restoId,
-            // }
             await postNewForm(form);
-
-            // const venueIdResponse = await axios.get(`
-            //     http://localhost:8080/api/venues/${venue}`);
-            // const venueId = venueIdResponse.data.id;
-
-            // if (parkingChoice === 'yes') {
-            //     toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
-            // } else {
-            //     toRestaurants(`/restaurants?venueId=${venueId}`);
-            // };
-
         } catch (error) {
             console.log("Form submission error: ", error);
         }
@@ -174,7 +145,7 @@ function ItineraryFormPage() {
                         </div>     
                         <div>
                             <select
-                                onChange={changeVenue}
+                                onChange={changeVenueName}
                                 defaultValue=''
                                 name='venue-list' 
                                 id='venue-list'
@@ -260,7 +231,10 @@ function ItineraryFormPage() {
                         </div>
                     </article>
                     {parkingChoice === 'yes' && (
-                            <Parking onSelect={handleParkingSelection} />
+                            <Parking 
+                                onSelect={(e) => {handleParkingSelection(e.target.value)}}
+                                venueId={venueId}
+                                venueName={venueName} />
                     )}
                     <article className='radio-group__restaurant-container'>
                         <div>
