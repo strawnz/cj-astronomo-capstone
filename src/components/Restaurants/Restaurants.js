@@ -1,6 +1,7 @@
 import './Restaurants.scss';
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
     console.log("Venue Id from Itinerary Form to Restaurants: ", venueId); // remove this eventually
@@ -46,8 +47,57 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
         }
     }, [restoOptions]);
     
+    const handleRestoSelection = (restoId) => {
+        console.log('Selected Resto ID: ', restoId);
+        setSelectedRestoId(restoId);
+        onSelect(restoId);
+    };
+
     return (
-        <h1>Restaurants Component Placeholder</h1>
+        <main className='main'>
+            <section className='restos__header-container'>
+                <h2 className='restos__header'>Restaurant Options near {venueName}</h2>
+                <h2 className='restos__subheader'>Please choose a restaurant</h2>
+            </section>
+            <section>
+                {restoInfo.map((option) => {
+                    const isSelected = option.resto_id === selectedRestoId;
+                return (
+                    <article
+                        className={`resto-card ${isSelected ? 'selected' : ''}`}
+                        key={option.resto_id}
+                        onClick={() => handleRestoSelection(option.resto_id)}
+                    >
+                        <h3 className='resto-card__name'>{option.restaurant_name}</h3>
+                        <p className='resto-card__info'>{option.address}</p>
+                        <p className='resto-card__info'>
+                            <span className='resto-card__info--bold'>Cuisine Type: &nbsp;&nbsp;</span> 
+                            {option.cuisine}
+                        </p>
+                        <div className="resto-card__distance">
+                            <h4 className="resto-card__card-header">
+                                Distance to {venueName}
+                            </h4>
+                            <p className="resto-card__info">
+                            {option.distance_venue} metres
+                            </p>
+                        </div>
+                        <div className="resto-card__duration">
+                            <h4 className="resto-card__card-header">
+                                Estimated walking time to {venueName}
+                            </h4>
+                            <p className="resto-card__info">
+                            {option.duration_venue} minutes
+                            </p>
+                        </div>
+                        <Link className='resto-card__website' to={option.website} target='_blank'>
+                            <h4 className='resto-card__info'>Visit Website</h4>
+                        </Link>
+                    </article>
+                )
+                })}
+            </section>
+        </main>
     )
 };
 

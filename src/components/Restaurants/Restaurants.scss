@@ -1,1 +1,62 @@
 @use '../../styles/partials/global.scss' as *;
+
+.restos {
+    &__header-container {
+        padding: 1rem 0;
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+}
+
+.resto-card {
+    margin: 1rem 0;
+    padding: 1.25rem 1rem 1rem;
+    border: 2px solid $text-grey;
+    border-radius: 10px;
+
+    &__name {
+        @include body-lg;
+        margin-bottom: 0.25rem;
+    }
+    
+    &__distance {
+        margin-bottom: 0.5rem;
+    }
+
+    &__card-header {
+        @include body-med;
+    }
+
+    &__info {
+        @include body-med;
+        margin-bottom: 0.5rem;
+
+        &--bold {
+            font-weight: 600;
+        }
+    }
+
+    &__website {
+        @include body-med;
+    }
+
+    &__website:hover {
+        text-decoration: underline;
+    }
+
+    &.selected {
+        border: 2px solid $text-grey;
+        background-color: $background-blue;
+    }
+
+    &:hover {
+        box-shadow: 2px 1px 3px 3px $text-grey;
+    }
+}
