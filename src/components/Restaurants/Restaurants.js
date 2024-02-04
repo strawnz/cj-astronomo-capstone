@@ -13,17 +13,17 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
         const fetchRestoOptions = async () => {
           try {
             const response = await axios.get(`
-                    http://localhost:8080/api/restos-venues/by-venue?venue_id=${venueId}`);
+                    http://localhost:8080/api/restos-venues/by-venue?venue_id=${venueId}&price_level=${priceChoice}`);
             setRestoOptions(response.data);
-            console.log("Restaurant options by venue Id: ", response.data); // remove this eventually
+            console.log("Restaurant options by venue ID and price level: ", response.data); // remove this eventually
           } catch (error) {
             console.log("Error fetching restaurant options: ", error);
           }
         };
-        if (venueId) {
+        if (venueId && priceChoice) {
           fetchRestoOptions();
         }
-      }, [venueId]);
+      }, [venueId, priceChoice]);
     
     return (
         <h1>Restaurants Component Placeholder</h1>
