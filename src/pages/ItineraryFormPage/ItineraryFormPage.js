@@ -334,11 +334,12 @@ function ItineraryFormPage() {
                             </div>
                         </article>
                     )}
-                    {priceChoice === '$' || priceChoice === '$$' || priceChoice ==='$$$' && (
+                    {(priceChoice === '$' || priceChoice === '$$' || priceChoice ==='$$$') && (
                         <Restaurants 
                             onSelect={(selectedRestoId) => handleRestoSelection(priceChoice, selectedRestoId)}
                             venueId={venueId}
-                            venueName={venueName} />
+                            venueName={venueName}
+                            priceChoice={priceChoice} />
                     )}
                     <div>
                         <button type="submit">
