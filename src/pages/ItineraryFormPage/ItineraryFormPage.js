@@ -22,8 +22,7 @@ function ItineraryFormPage() {
     const [restoId, setRestoId] = useState('');
     const [venueId, setVenueId] = useState('');
 
-    const toParking = useNavigate();
-    const toRestaurants = useNavigate();
+    const toCompletedItinerary = useNavigate(); 
 
     const changeVenueName = (event) => {
         const selectedVenueName = event.target.value;
@@ -152,6 +151,8 @@ function ItineraryFormPage() {
         } catch (error) {
             console.log("Form submission error: ", error);
         }
+
+        toCompletedItinerary("/completed");
     };
 
     return (
