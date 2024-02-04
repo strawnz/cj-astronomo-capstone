@@ -32,14 +32,15 @@ function Parking({ venueId, venueName, onSelect }) {
   return (
     <main className="main">
       <section className="parking__header-container">
-        <h1 className="parking__header">Parking Options near {venueName}</h1>
+        <h2 className="parking__header">Parking Options near {venueName}</h2>
         <h2 className="parking__subheader">Please choose a parking lot</h2>
       </section>
       <section>
         {parkingOptions.map((parking) => {
+            const isSelected = parking.id === selectedParkingId; 
           return (
             <article
-              className="park-card"
+              className={`park-card ${isSelected ? 'selected' : ''}`}
               key={parking.id}
               onClick={() => handleParkingSelection(parking.id)}
             >
