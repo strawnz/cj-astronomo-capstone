@@ -2,7 +2,7 @@ import "./Parking.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Parking({ venueId, venueName }) {
+function Parking({ venueId, venueName, onSelect }) {
   console.log("Venue Id from Itinerary Form: ", venueId);
   const [parkingOptions, setParkingOptions] = useState([]);
   const [selectedParkingId, setSelectedParkingId] = useState(null);
@@ -24,7 +24,9 @@ function Parking({ venueId, venueName }) {
   }, [venueId]);
 
   const handleParkingSelection = (parkingId) => {
+    console.log('Selected Parking ID: ', parkingId);
     setSelectedParkingId(parkingId);
+    onSelect(parkingId);
   };
 
   return (

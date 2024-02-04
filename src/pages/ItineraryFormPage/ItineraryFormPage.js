@@ -86,22 +86,36 @@ function ItineraryFormPage() {
             ...form,
             option_parking: event.target.value,
         }))
-        console.log(event.target.value);
+        console.log(event.target.value); // remove this eventually
         setParkingChoice(event.target.value);
     };
     const changeEat = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_restaurant: event.target.value,
+        }));
+        console.log(event.target.value); // remove this eventually
         setEatChoice(event.target.value);
     };
     const changePrice = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_price: event.target.value,
+        }));
+        console.log(event.target.value); // remove this eventually
         setPriceChoice(event.target.value);
     };
 
-    const handleParkingSelection = async (parkingChoice) => {
+    const handleParkingSelection = async (parkingChoice, selectedParkingId) => {
         setForm((form) => ({
             ...form,
             option_parking: parkingChoice,
         }));
-        toParking(`/parking`);
+        console.log('Parking Id from Parking component: ', selectedParkingId);
+        setParkingId(selectedParkingId);
+        // if (parkingChoice === 'yes') {
+        //     toParking(`/parking`);
+        // }
     };
 
     const postNewForm = async (newForm) => {
@@ -121,7 +135,12 @@ function ItineraryFormPage() {
         event.preventDefault();
 
         try {
-            await postNewForm(form);
+            const updatedForm = {
+                ...form,
+                parking_id: parkingId,
+            }
+            console.log('All form options before submitting: ', updatedForm);
+            await postNewForm(updatedForm);
         } catch (error) {
             console.log("Form submission error: ", error);
         }
@@ -232,7 +251,7 @@ function ItineraryFormPage() {
                     </article>
                     {parkingChoice === 'yes' && (
                             <Parking 
-                                onSelect={(e) => {handleParkingSelection(e.target.value)}}
+                                onSelect={(selectedParkingId) => handleParkingSelection('yes', selectedParkingId)}
                                 venueId={venueId}
                                 venueName={venueName} />
                     )}
