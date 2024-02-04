@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Parking({ venueId, venueName, onSelect }) {
-  console.log("Venue Id from Itinerary Form: ", venueId);
+  console.log("Venue Id from Itinerary Form to Parking: ", venueId);
   const [parkingOptions, setParkingOptions] = useState([]);
   const [selectedParkingId, setSelectedParkingId] = useState(null);
 

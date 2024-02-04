@@ -2,7 +2,7 @@
 
 .parking {
     &__header-container {
-        padding: 1.25rem 1rem;
+        padding: 1rem 0;
     }
 
     &__header {
@@ -62,7 +62,7 @@
 }
 
 .park-card {
-    margin: 1rem;
+    margin: 1rem 0;
     padding: 1.25rem 1rem;
     border: 2px solid $text-grey;
     border-radius: 10px;
