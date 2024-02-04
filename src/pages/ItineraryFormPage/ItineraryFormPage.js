@@ -1,5 +1,5 @@
 import './ItineraryFormPage.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
@@ -7,35 +7,115 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
+import Parking from '../../components/Parking/Parking';
 
 function ItineraryFormPage() {
-    const [venue, setVenue] = useState('');
+    const [venueName, setVenueName] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
     const [parkingChoice, setParkingChoice] = useState('');
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
+    const [form, setForm] = useState({});
+    const [parkingId, setParkingId] = useState('');
+    const [restoId, setRestoId] = useState('');
+    const [venueId, setVenueId] = useState('');
 
     const toParking = useNavigate();
     const toRestaurants = useNavigate();
 
-    const changeVenue = (event) => {
-        setVenue(event.target.value);
+    const changeVenueName = (event) => {
+        const selectedVenueName = event.target.value;
+        setForm((form) => ({
+            ...form,
+            venue_name: selectedVenueName,
+        }))
+        console.log(selectedVenueName); // remove this eventually
+        setVenueName(selectedVenueName);
     };
+
+    useEffect(() => {
+        const fetchVenueId = async () => {
+            try {
+                const venueIdResponse = await axios.get(`
+                http://localhost:8080/api/venues/name/${venueName}`);
+                console.log("Venue ID Response: ", venueIdResponse.data.id); // remove this eventually
+                setVenueId(venueIdResponse.data.id);
+            } catch (error) {
+                console.log('Unable to retrieve venue Id: ', error);
+            }
+        }
+        if (!venueId && venueName) {
+            fetchVenueId();
+        }
+    }, [venueName]);
+
     const changeDate = (date) => {
+        const formattedDate = startDate.toLocaleDateString('en-CA', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+        });
+
+        const formattedTime = startDate.toLocaleTimeString('en-CA', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,
+        });
+
+        const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
+        setForm((form) => ({
+            ...form,
+            event_date: formattedDateTime,
+        }))
+        console.log(date); // remove this eventually
         setStartDate(date);
     };
     const changeTime = (time) => {
+        setForm((form) => ({
+            ...form,
+            preferred_time: time,
+        }))
+        console.log(time); // remove this eventually
         setTime(time);
     };
     const changeParking = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_parking: event.target.value,
+        }))
+        console.log(event.target.value); // remove this eventually
         setParkingChoice(event.target.value);
     };
     const changeEat = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_restaurant: event.target.value,
+        }));
+        console.log(event.target.value); // remove this eventually
         setEatChoice(event.target.value);
     };
     const changePrice = (event) => {
+        setForm((form) => ({
+            ...form,
+            option_price: event.target.value,
+        }));
+        console.log(event.target.value); // remove this eventually
         setPriceChoice(event.target.value);
+    };
+
+    const handleParkingSelection = async (parkingChoice, selectedParkingId) => {
+        setForm((form) => ({
+            ...form,
+            option_parking: parkingChoice,
+        }));
+        console.log('Parking Id from Parking component: ', selectedParkingId);
+        setParkingId(selectedParkingId);
+        // if (parkingChoice === 'yes') {
+        //     toParking(`/parking`);
+        // }
     };
 
     const postNewForm = async (newForm) => {
@@ -55,41 +135,12 @@ function ItineraryFormPage() {
         event.preventDefault();
 
         try {
-            const formattedDate = startDate.toLocaleDateString('en-CA', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-            });
-
-            const formattedTime = startDate.toLocaleTimeString('en-CA', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false,
-            });
-
-            const formattedDateTime = `${formattedDate} ${formattedTime}`;
-
-            const newFormData = {
-                venue_name: venue,
-                event_date: formattedDateTime,
-                preferred_time: time,
-                option_parking: parkingChoice,
-                option_restaurant: eatChoice,
-                option_price: priceChoice,
+            const updatedForm = {
+                ...form,
+                parking_id: parkingId,
             }
-            await postNewForm(newFormData);
-
-            const venueIdResponse = await axios.get(`
-                http://localhost:8080/api/venues/${venue}`);
-            const venueId = venueIdResponse.data.id;
-
-            if (parkingChoice === 'yes') {
-                toParking(`/parking?venueId=${venueId}&venueName=${encodeURIComponent(venue)}`);
-            } else {
-                toRestaurants(`/restaurants?venueId=${venueId}`);
-            };
-
+            console.log('All form options before submitting: ', updatedForm);
+            await postNewForm(updatedForm);
         } catch (error) {
             console.log("Form submission error: ", error);
         }
@@ -113,7 +164,7 @@ function ItineraryFormPage() {
                         </div>     
                         <div>
                             <select
-                                onChange={changeVenue}
+                                onChange={changeVenueName}
                                 defaultValue=''
                                 name='venue-list' 
                                 id='venue-list'
@@ -198,6 +249,12 @@ function ItineraryFormPage() {
                             </label>
                         </div>
                     </article>
+                    {parkingChoice === 'yes' && (
+                            <Parking 
+                                onSelect={(selectedParkingId) => handleParkingSelection('yes', selectedParkingId)}
+                                venueId={venueId}
+                                venueName={venueName} />
+                    )}
                     <article className='radio-group__restaurant-container'>
                         <div>
                             <p>Would you like to eat near the venue?</p>
