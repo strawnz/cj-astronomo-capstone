@@ -8,6 +8,7 @@ import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import 'react-clock/dist/Clock.css';
 import Parking from '../../components/Parking/Parking';
+import Restaurants from '../../components/Restaurants/Restaurants';
 
 function ItineraryFormPage() {
     const [venueName, setVenueName] = useState('');
@@ -113,10 +114,16 @@ function ItineraryFormPage() {
         }));
         console.log('Parking Id from Parking component: ', selectedParkingId);
         setParkingId(selectedParkingId);
-        // if (parkingChoice === 'yes') {
-        //     toParking(`/parking`);
-        // }
     };
+
+    const handleRestoSelection = async (priceChoice, selectedRestoId) => {
+        setForm((form) => ({
+            ...form,
+            option_price: priceChoice,
+        }));
+        console.log('Resto Id from Restaurant component: ', selectedRestoId);
+        setRestoId(selectedRestoId);
+    }
 
     const postNewForm = async (newForm) => {
         try {
@@ -138,8 +145,9 @@ function ItineraryFormPage() {
             const updatedForm = {
                 ...form,
                 parking_id: parkingId,
+                resto_id: restoId
             }
-            console.log('All form options before submitting: ', updatedForm);
+            console.log('All form options submitted: ', updatedForm);
             await postNewForm(updatedForm);
         } catch (error) {
             console.log("Form submission error: ", error);
@@ -325,6 +333,12 @@ function ItineraryFormPage() {
                                 </label>
                             </div>
                         </article>
+                    )}
+                    {priceChoice === '$' || priceChoice === '$$' || priceChoice ==='$$$' && (
+                        <Restaurants 
+                            onSelect={(selectedRestoId) => handleRestoSelection(priceChoice, selectedRestoId)}
+                            venueId={venueId}
+                            venueName={venueName} />
                     )}
                     <div>
                         <button type="submit">
