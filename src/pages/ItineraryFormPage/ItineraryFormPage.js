@@ -83,18 +83,20 @@ function ItineraryFormPage() {
     }, [venueName, venueId]);
 
     const changeDate = (date) => {
-        const formattedDate = startDate.toLocaleDateString('en-CA', {
+        const formattedDate = date.toLocaleDateString('en-CA', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
         });
+        console.log('formattedDate: ', formattedDate);
 
-        const formattedTime = startDate.toLocaleTimeString('en-CA', {
+        const formattedTime = date.toLocaleTimeString('en-CA', {
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
             hour12: false,
         });
+        console.log('formattedTime: ', formattedTime);
 
         const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
@@ -169,6 +171,19 @@ function ItineraryFormPage() {
             }
         };
 
+    const updateLastForm = async (updatedForm) => {
+        try {
+            const response = await axios.put(
+                `http://localhost:8080/api/forms/${storedFormId}`,
+                updatedForm
+            );
+            console.log(response.data);
+            return response;
+        } catch (error) {
+            console.log("Error updating form: ", error);
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -183,6 +198,9 @@ function ItineraryFormPage() {
 
             const newId = await postNewForm(updatedForm); 
             setFormId(newId);
+
+            const updatedId = await updateLastForm(updatedForm);
+            setFormId(updatedId);
 
             setShowSuccessMessage(true);
 
