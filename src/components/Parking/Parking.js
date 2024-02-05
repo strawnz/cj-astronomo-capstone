@@ -2,10 +2,10 @@ import "./Parking.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Parking({ venueId, venueName, onSelect }) {
+function Parking({ venueId, venueName, onSelect, parkingId }) {
   console.log("Venue Id from Itinerary Form to Parking: ", venueId);
   const [parkingOptions, setParkingOptions] = useState([]);
-  const [selectedParkingId, setSelectedParkingId] = useState(null);
+  const [selectedParkingId, setSelectedParkingId] = useState(parkingId);
 
   useEffect(() => {
     const fetchParkingOptions = async () => {

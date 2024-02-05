@@ -1,6 +1,6 @@
 import './ItineraryFormPage.scss';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -22,15 +22,38 @@ function ItineraryFormPage() {
     const [priceChoice, setPriceChoice] = useState('');
     const [restoId, setRestoId] = useState('');
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [formId, setFormId] = useState('');
 
     const toCompletedItinerary = useNavigate(); 
 
-    // useEffect(() => {
-    //     const storedForm = sessionStorage.getItem('itineraryFormData')
-    //     if (storedForm) {
-    //         setForm(JSON.parse(storedForm));
-    //     }
-    // }, []);
+    const params = useParams();
+    const storedFormId = params.formId;
+    console.log('Form Id: ', formId);
+    console.log('Start Date: ', startDate);
+
+    useEffect(() => {
+        const storedForm = async () => {
+            try {
+                const fetchStoredForm = await axios.get(`
+                http://localhost:8080/api/forms/${storedFormId}`);
+                console.log('Fetch stored form: ', fetchStoredForm);
+                setForm(fetchStoredForm);
+                setVenueName(fetchStoredForm.data.venue_name);
+                setStartDate(new Date(fetchStoredForm.data.event_date));
+                setTime(fetchStoredForm.data.preferred_time);
+                setParkingChoice(fetchStoredForm.data.option_parking);
+                setParkingId(fetchStoredForm.data.parking_id);
+                setEatChoice(fetchStoredForm.data.option_restaurant);
+                setPriceChoice(fetchStoredForm.data.option_price);
+                setRestoId(fetchStoredForm.data.resto_id);
+            } catch (error) {
+                console.log('Error fetching stored form: ', error);
+            }
+        }
+        if (storedFormId) {
+            storedForm();
+        }
+    }, [storedFormId]);
 
     const changeVenueName = (event) => {
         const selectedVenueName = event.target.value;
@@ -145,10 +168,6 @@ function ItineraryFormPage() {
                 console.log("Error posting form: ", error);
             }
         };
-        
-    // useEffect(() => {
-    //     sessionStorage.setItem('itineraryFormData', JSON.stringify(form));
-    // }, [form, parkingId, restoId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -161,7 +180,9 @@ function ItineraryFormPage() {
                 venue_id: venueId
             }
             console.log('All form options submitted: ', updatedForm);
-            await postNewForm(updatedForm);
+
+            const newId = await postNewForm(updatedForm); 
+            setFormId(newId);
 
             setShowSuccessMessage(true);
 
@@ -169,8 +190,6 @@ function ItineraryFormPage() {
                 setShowSuccessMessage(false);
                 toCompletedItinerary("/completed");
             }, 4000)
-
-            // toCompletedItinerary("/completed");
 
         } catch (error) {
             console.log("Form submission error: ", error);
@@ -196,14 +215,16 @@ function ItineraryFormPage() {
                         <div>
                             <select
                                 onChange={changeVenueName}
-                                defaultValue=''
+                                value={venueName}
                                 name='venue-list' 
                                 id='venue-list'
                                 className='venue-list__drop-down'
                             >
-                                <option value='' disabled>
-                                    Please select a venue
-                                </option>
+                                {!venueName && (
+                                    <option value='' disabled>
+                                        Please select a venue
+                                    </option>
+                                )}
                                 <option value='BMO Field'>BMO Field</option>
                                 <option value='Budweiser Stage'>Budweiser Stage</option>
                                 <option value='Four Seasons Centre'>Four Seasons Centre for the Performing Arts</option>
@@ -264,6 +285,7 @@ function ItineraryFormPage() {
                                 id='yes'
                                 value='yes'
                                 name='parking-choice'
+                                checked={parkingChoice === 'yes' ? true : false}
                             />
                             Yes
                             </label>
@@ -275,6 +297,7 @@ function ItineraryFormPage() {
                                 id='no'
                                 value='no'
                                 name='parking-choice'
+                                checked={parkingChoice === 'no' ? true : false}
                             />
                             No
                             </label>
@@ -284,7 +307,8 @@ function ItineraryFormPage() {
                             <Parking 
                                 onSelect={(selectedParkingId) => handleParkingSelection('yes', selectedParkingId)}
                                 venueId={venueId}
-                                venueName={venueName} />
+                                venueName={venueName}
+                                parkingId={parkingId}/>
                     )}
                     <article className='radio-group__restaurant-container'>
                         <div>
@@ -299,6 +323,7 @@ function ItineraryFormPage() {
                                 value='yes'
                                 name='resto-choice'
                                 onChange={changeEat}
+                                checked={eatChoice === 'yes' ? true : false}
                             />
                             Yes
                             </label>
@@ -310,6 +335,7 @@ function ItineraryFormPage() {
                                 value='no'
                                 name='resto-choice'
                                 onChange={changeEat}
+                                checked={eatChoice === 'no' ? true : false}
                             />
                             No
                             </label>
@@ -329,6 +355,7 @@ function ItineraryFormPage() {
                                     value='$'
                                     name='price-choice'
                                     onChange={changePrice}
+                                    checked={priceChoice === '$' ? true : false}
                                 />
                                 $
                                 </label>
@@ -340,6 +367,7 @@ function ItineraryFormPage() {
                                     value='$$'
                                     name='price-choice'
                                     onChange={changePrice}
+                                    checked={priceChoice === '$$' ? true : false}
                                 />
                                 $$
                                 </label>
@@ -351,6 +379,7 @@ function ItineraryFormPage() {
                                     value='$$$'
                                     name='price-choice'
                                     onChange={changePrice}
+                                    checked={priceChoice === '$$$' ? true : false}
                                 />
                                 $$$
                                 </label>
@@ -362,7 +391,8 @@ function ItineraryFormPage() {
                             onSelect={(selectedRestoId) => handleRestoSelection(priceChoice, selectedRestoId)}
                             venueId={venueId}
                             venueName={venueName}
-                            priceChoice={priceChoice} />
+                            priceChoice={priceChoice}
+                            restoId={restoId} />
                     )}
                     <div>
                         <button type="submit">

@@ -16,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/form' element={<ItineraryFormPage />}/>
+        <Route path='/form/:formId' element={<ItineraryFormPage />}/>
         <Route path='/parking' element={<Parking />}/>
         <Route path='/restaurants' element={<Restaurants />}/>
         <Route path='/completed' element={<CompletedItineraryPage />}/>

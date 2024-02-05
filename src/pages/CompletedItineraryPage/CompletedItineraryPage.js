@@ -157,8 +157,8 @@ function CompletedItineraryPage() {
                 </article>
             </section>
             <section className='completed__buttons'>
-                <Link to='/' className='completed__home'>Home Page</Link>
                 <Link to='/form' className='completed__back'>Change Form</Link>
+                <Link to='/' className='completed__home'>Home Page</Link>
             </section>
         </main>
     )

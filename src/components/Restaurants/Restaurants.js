@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
+function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
     console.log("Venue Id from Itinerary Form to Restaurants: ", venueId); // remove this eventually
     console.log("Price Choice from Itinerary Form to Restaurants: ", priceChoice); // remove this eventually
     const [restoOptions, setRestoOptions] = useState([]);
     const [restoInfo, setRestoInfo] = useState([]);
-    const [selectedRestoId, setSelectedRestoId] = useState(null);
+    const [selectedRestoId, setSelectedRestoId] = useState(restoId);
 
     useEffect(() => {
         const fetchRestoOptions = async () => {
