@@ -81,18 +81,32 @@ function CompletedItineraryPage() {
         return time.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit', hour12: true });
     }
 
-    const parkingAddress = latestFormInfo.parking_info.address;
-    const restoName = latestFormInfo.resto_info.restaurant_name;
-    const restoAddress = latestFormInfo.resto_info.address;
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric' });
+    }
 
-    // const eventDate = latestFormInfo.latest_form.event_date;
+    if (!latestFormInfo || !latestFormInfo.latest_form) {
+        return <div>Loading...</div>;
+    }
+
+        const eventDate = latestFormInfo.latest_form.event_date;
+        const parkingAddress = latestFormInfo.parking_info.address;
+        const restoName = latestFormInfo.resto_info.restaurant_name;
+        const restoAddress = latestFormInfo.resto_info.address;
+        const restoDuration = latestFormInfo.parking_resto_info.duration_resto;
+        const venueName = latestFormInfo.venue_info.venue_name;
+        const venueAddress = latestFormInfo.venue_info.address;
+        const venueDuration = latestFormInfo.resto_venue_info.duration_venue;
+        const venueImage = `http://localhost:8080${latestFormInfo.venue_info.image_path}`;
+        const preferredTime = latestFormInfo.latest_form.preferred_time;
 
     return (
         <main className='main'>
             <section className='completed__header-container'>
                 <h1 className='completed__header'>Your Pre-Event Planner is Ready!</h1>
                 <h2 className='completed__subheader'>
-                    Here is a personalized itinerary we've tailored just for you
+                    Here is a personalized itinerary for your event on {formatDate(eventDate)} that we've tailored just for you
                 </h2>
             </section>
             <section className='completed__itinerary-container'>
@@ -110,6 +124,35 @@ function CompletedItineraryPage() {
                         <h3 className='itin__header'>{formatTime(parkingToRestoTime)}</h3>
                         <h4 className='itin__subheader'>Walk to {restoName}</h4>
                         <p className='itin__info'>{restoAddress}</p>
+                        <p className='itin__info--sm'>Approximately {restoDuration} minutes</p>
+                    </div>
+                </article>
+                <article className='itin__pit-stop'>
+                    <div className='itin__dest-point'></div>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(timeAtResto)}</h3>
+                        <h4 className='itin__subheader'>Arrive at {restoName} and eat a delicious meal</h4>
+                        <p className='itin__info--sm'>
+                            Please note that we've allocated 90 minutes for this activity
+                        </p>
+                    </div>
+                </article>
+                <article className='itin__pit-stop'>
+                    <div className='itin__dest-point'></div>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(restoToVenueTime)}</h3>
+                        <h4 className='itin__subheader'>Walk to {venueName}</h4>
+                        <p className='itin__info'>{venueAddress}</p>
+                        <p className='itin__info--sm'>Approximately {venueDuration} minutes</p>
+                    </div>
+                </article>
+                <article className='itin__final-dest'>
+                    <div className='itin__dest-point'></div>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(preferredTime)}</h3>
+                        <h3 className='itin__header'>Arrive at {venueName}</h3>
+                        <img src={venueImage} className='itin__image' alt={venueName}/>
+                        <h3 className='itin__header'>Have a great time at your event!</h3>
                     </div>
                 </article>
             </section>
