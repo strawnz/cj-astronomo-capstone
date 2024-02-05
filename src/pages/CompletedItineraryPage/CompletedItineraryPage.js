@@ -100,6 +100,7 @@ function CompletedItineraryPage() {
         const venueDuration = latestFormInfo.resto_venue_info.duration_venue;
         const venueImage = `http://localhost:8080${latestFormInfo.venue_info.image_path}`;
         const preferredTime = latestFormInfo.latest_form.preferred_time;
+        const formId = latestFormInfo.latest_form.id;
 
     return (
         <main className='main'>
@@ -157,7 +158,7 @@ function CompletedItineraryPage() {
                 </article>
             </section>
             <section className='completed__buttons'>
-                <Link to='/form' className='completed__back'>Change Form</Link>
+                <Link to={`/form/${formId}`} className='completed__back'>Change Form</Link>
                 <Link to='/' className='completed__home'>Home Page</Link>
             </section>
         </main>

@@ -22,6 +22,20 @@
         @include flex-column;
         margin-bottom: 1rem;
     }
+
+    &__submit {
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 1rem;
+        background-color: $button-grey;
+        color: $text-blue;
+        border: 1px solid $text-grey;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .venue-list {

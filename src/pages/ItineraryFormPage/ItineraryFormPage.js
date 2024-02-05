@@ -394,16 +394,16 @@ function ItineraryFormPage() {
                             priceChoice={priceChoice}
                             restoId={restoId} />
                     )}
-                    <div>
-                        <button type="submit">
-                            Submit
-                        </button>
-                    </div>
                     {showSuccessMessage && (
                         <div className='form__success'>
                             Thank you for submitting your answers! Your Pre-Event Planner will be ready momentarily. 
                         </div>
                     )}
+                    <div>
+                        <button type="submit" className="form__submit">
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </section>
         </main>
