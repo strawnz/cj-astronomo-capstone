@@ -15,7 +15,7 @@
     }
 
     &__itinerary-container {
-        margin: 1rem 1rem;
+        margin: 1rem 1.5rem;
         @include flex-column;
     }
 }
@@ -24,17 +24,37 @@
     &__pit-stop {
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
+        border-left: 2px solid $text-grey;
+        position: relative;
+        padding-bottom: 1.5rem;
     }
 
     &__dest-point {
-        height: 16px;
-        width: 16px;
+        height: 14px;
+        width: 14px;
         border-radius: 50%;
         border: 1px solid $text-grey;
         background-color: $background-blue;
+        position: absolute;
+        top: -1px;
+        left: -8px;
+    }
+
+    &__content {
+        margin-left: 1.5rem;
+        position: relative;
     }
 
     &__header {
+        font-size: 0.9375rem;
+    }
+
+    &__subheader {
+        @include body-med;
+    }
+
+    &__info {
         @include body-med;
     }
 }

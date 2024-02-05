@@ -7,6 +7,8 @@ function CompletedItineraryPage() {
     const [latestFormInfo, setLatestFormInfo] = useState([]);
     const [restoToVenueTime, setRestoToVenueTime] = useState(null);
     const [timeAtResto, setTimeAtResto] = useState(null);
+    const [parkingToRestoTime, setParkingToRestoTime] = useState(null);
+    const [findParkingTime, setFindParkingTime] = useState(null);
 
     useEffect(() => {
         const fetchLatestFormInfo = async () => {
@@ -22,14 +24,12 @@ function CompletedItineraryPage() {
         fetchLatestFormInfo();
     }, []);
 
-    // const eventDate = latestFormInfo.latest_form.event_date;
-
     const calculateTimeBackwards = (startTime, duration) => {
-        console.log("calculateTimeBackwards - startTime: ", startTime);
+        // console.log("calculateTimeBackwards - startTime: ", startTime);
         const time = new Date(`2024-01-01T${startTime}`);
-        console.log("calculateTimeBackwards - time before adjustment: ", time);
+        // console.log("calculateTimeBackwards - time before adjustment: ", time);
         time.setMinutes(time.getMinutes() - duration);
-        console.log("calculateTimeBackwards - time after adjustment: ", time);
+        // console.log("calculateTimeBackwards - time after adjustment: ", time);
         return time.toLocaleTimeString('en-GB'); 
     }
 
@@ -47,12 +47,45 @@ function CompletedItineraryPage() {
     useEffect(() => {
         console.log("Resto to Venue Time in useEffect: ", restoToVenueTime);
         if (restoToVenueTime) {
-            const calculateTimeAtResto = calculateTimeBackwards(restoToVenueTime, 90);
+            const calculateTimeAtResto = calculateTimeBackwards(
+                restoToVenueTime, 90);
             console.log("Time at Resto: ", calculateTimeAtResto);
             setTimeAtResto(calculateTimeAtResto);
         }
     }, [restoToVenueTime]); 
 
+    useEffect(() => {
+        console.log("Time spent at Resto in useEffect: ", timeAtResto);
+        if (timeAtResto) {
+            const calculateParkingToRestoTime = calculateTimeBackwards(
+                timeAtResto, latestFormInfo.parking_resto_info.duration_resto
+            );
+            console.log("Time from Parking to Resto: ", calculateParkingToRestoTime);
+            setParkingToRestoTime(calculateParkingToRestoTime);
+        }
+    }, [timeAtResto]);
+
+    useEffect(() => {
+        console.log("Parking to Resto Time in useEffect: ", parkingToRestoTime);
+        if (parkingToRestoTime) {
+            const calculateFindParkingTime = calculateTimeBackwards(
+                parkingToRestoTime, 5
+            );
+            console.log("Time to Find Parking: ", calculateFindParkingTime);
+            setFindParkingTime(calculateFindParkingTime);
+        }
+    }, [parkingToRestoTime]);
+
+    const formatTime = (timeString) => {
+        const time = new Date(`2024-01-01T${timeString}`);
+        return time.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit', hour12: true });
+    }
+
+    const parkingAddress = latestFormInfo.parking_info.address;
+    const restoName = latestFormInfo.resto_info.restaurant_name;
+    const restoAddress = latestFormInfo.resto_info.address;
+
+    // const eventDate = latestFormInfo.latest_form.event_date;
 
     return (
         <main className='main'>
@@ -65,8 +98,18 @@ function CompletedItineraryPage() {
             <section className='completed__itinerary-container'>
                 <article className='itin__pit-stop'>
                     <div className='itin__dest-point'></div>
-                    <div>
-                        <h3 className='itin__header'>Text Placeholder</h3>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(findParkingTime)}</h3>
+                        <h4 className='itin__subheader'>Arrive at parking lot and find parking</h4>
+                        <p className='itin__info'>{parkingAddress}</p>
+                    </div>
+                </article>
+                <article className='itin__pit-stop'>
+                    <div className='itin__dest-point'></div>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(parkingToRestoTime)}</h3>
+                        <h4 className='itin__subheader'>Walk to {restoName}</h4>
+                        <p className='itin__info'>{restoAddress}</p>
                     </div>
                 </article>
             </section>
