@@ -1,1 +1,16 @@
 @use '../../styles/partials/global.scss' as *;
+
+.completed {
+    &__header-container {
+        padding: 1.25rem 1rem;
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+}
