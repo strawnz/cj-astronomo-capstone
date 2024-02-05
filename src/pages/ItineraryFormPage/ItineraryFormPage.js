@@ -25,12 +25,12 @@ function ItineraryFormPage() {
 
     const toCompletedItinerary = useNavigate(); 
 
-    useEffect(() => {
-        const storedForm = sessionStorage.getItem('itineraryFormData')
-        if (storedForm) {
-            setForm(JSON.parse(storedForm));
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedForm = sessionStorage.getItem('itineraryFormData')
+    //     if (storedForm) {
+    //         setForm(JSON.parse(storedForm));
+    //     }
+    // }, []);
 
     const changeVenueName = (event) => {
         const selectedVenueName = event.target.value;
@@ -146,9 +146,9 @@ function ItineraryFormPage() {
             }
         };
         
-    useEffect(() => {
-        sessionStorage.setItem('itineraryFormData', JSON.stringify(form));
-    }, [form, parkingId, restoId]);
+    // useEffect(() => {
+    //     sessionStorage.setItem('itineraryFormData', JSON.stringify(form));
+    // }, [form, parkingId, restoId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -168,7 +168,9 @@ function ItineraryFormPage() {
             setTimeout(() => {
                 setShowSuccessMessage(false);
                 toCompletedItinerary("/completed");
-            }, 4250)
+            }, 4000)
+
+            // toCompletedItinerary("/completed");
 
         } catch (error) {
             console.log("Form submission error: ", error);

@@ -25,9 +25,12 @@ function CompletedItineraryPage() {
     // const eventDate = latestFormInfo.latest_form.event_date;
 
     const calculateTimeBackwards = (startTime, duration) => {
-        const time = new Date(`2024-02-04T${startTime}`);
+        console.log("calculateTimeBackwards - startTime: ", startTime);
+        const time = new Date(`2024-01-01T${startTime}`);
+        console.log("calculateTimeBackwards - time before adjustment: ", time);
         time.setMinutes(time.getMinutes() - duration);
-        return time.toLocaleDateString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        console.log("calculateTimeBackwards - time after adjustment: ", time);
+        return time.toLocaleTimeString('en-GB'); 
     }
 
     useEffect(() => {
@@ -39,8 +42,16 @@ function CompletedItineraryPage() {
             console.log("Time from Resto to Venue: ", calculateRestoToVenueTime); // remove this eventually
             setRestoToVenueTime(calculateRestoToVenueTime);
         }
-    }, [latestFormInfo]);
-
+    }, [latestFormInfo]); 
+    
+    useEffect(() => {
+        console.log("Resto to Venue Time in useEffect: ", restoToVenueTime);
+        if (restoToVenueTime) {
+            const calculateTimeAtResto = calculateTimeBackwards(restoToVenueTime, 90);
+            console.log("Time at Resto: ", calculateTimeAtResto);
+            setTimeAtResto(calculateTimeAtResto);
+        }
+    }, [restoToVenueTime]); 
 
 
     return (
@@ -52,10 +63,13 @@ function CompletedItineraryPage() {
                 </h2>
             </section>
             <section className='completed__itinerary-container'>
-
+                <article className='itin__pit-stop'>
+                    <div className='itin__dest-point'></div>
+                    <div>
+                        <h3 className='itin__header'>Text Placeholder</h3>
+                    </div>
+                </article>
             </section>
-
-            <Link to='/form'>Back to form</Link>
         </main>
     )
 };

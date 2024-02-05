@@ -13,4 +13,28 @@
         @include subheader;
         margin-top: 1rem;
     }
+
+    &__itinerary-container {
+        margin: 1rem 1rem;
+        @include flex-column;
+    }
+}
+
+.itin {
+    &__pit-stop {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__dest-point {
+        height: 16px;
+        width: 16px;
+        border-radius: 50%;
+        border: 1px solid $text-grey;
+        background-color: $background-blue;
+    }
+
+    &__header {
+        @include body-med;
+    }
 }
