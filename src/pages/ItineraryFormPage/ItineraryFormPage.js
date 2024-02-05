@@ -11,27 +11,36 @@ import Parking from '../../components/Parking/Parking';
 import Restaurants from '../../components/Restaurants/Restaurants';
 
 function ItineraryFormPage() {
+    const [form, setForm] = useState({});
     const [venueName, setVenueName] = useState('');
+    const [venueId, setVenueId] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
     const [parkingChoice, setParkingChoice] = useState('');
+    const [parkingId, setParkingId] = useState('');
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
-    const [form, setForm] = useState({});
-    const [parkingId, setParkingId] = useState('');
     const [restoId, setRestoId] = useState('');
-    const [venueId, setVenueId] = useState('');
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const toCompletedItinerary = useNavigate(); 
 
+    useEffect(() => {
+        const storedForm = sessionStorage.getItem('itineraryFormData')
+        if (storedForm) {
+            setForm(JSON.parse(storedForm));
+        }
+    }, []);
+
     const changeVenueName = (event) => {
         const selectedVenueName = event.target.value;
+        setVenueName(selectedVenueName);
+
         setForm((form) => ({
             ...form,
             venue_name: selectedVenueName,
         }))
         console.log(selectedVenueName); // remove this eventually
-        setVenueName(selectedVenueName);
     };
 
     useEffect(() => {
@@ -48,7 +57,7 @@ function ItineraryFormPage() {
         if (!venueId && venueName) {
             fetchVenueId();
         }
-    }, [venueName]);
+    }, [venueName, venueId]);
 
     const changeDate = (date) => {
         const formattedDate = startDate.toLocaleDateString('en-CA', {
@@ -123,7 +132,7 @@ function ItineraryFormPage() {
         console.log('Resto Id from Restaurant component: ', selectedRestoId);
         setRestoId(selectedRestoId);
     }
-
+    
     const postNewForm = async (newForm) => {
         try {
             const response = await axios.post(
@@ -132,10 +141,14 @@ function ItineraryFormPage() {
                 );
                 console.log(response.data); // remove this eventually
                 return response;
-        } catch (error) {
-            console.log("Error posting form: ", error);
-        }
-    };
+            } catch (error) {
+                console.log("Error posting form: ", error);
+            }
+        };
+        
+    useEffect(() => {
+        sessionStorage.setItem('itineraryFormData', JSON.stringify(form));
+    }, [form, parkingId, restoId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -144,15 +157,22 @@ function ItineraryFormPage() {
             const updatedForm = {
                 ...form,
                 parking_id: parkingId,
-                resto_id: restoId
+                resto_id: restoId,
+                venue_id: venueId
             }
             console.log('All form options submitted: ', updatedForm);
             await postNewForm(updatedForm);
+
+            setShowSuccessMessage(true);
+
+            setTimeout(() => {
+                setShowSuccessMessage(false);
+                toCompletedItinerary("/completed");
+            }, 4250)
+
         } catch (error) {
             console.log("Form submission error: ", error);
         }
-
-        toCompletedItinerary("/completed");
     };
 
     return (
@@ -347,6 +367,11 @@ function ItineraryFormPage() {
                             Submit
                         </button>
                     </div>
+                    {showSuccessMessage && (
+                        <div className='form__success'>
+                            Thank you for submitting your answers! Your Pre-Event Planner will be ready momentarily. 
+                        </div>
+                    )}
                 </form>
             </section>
         </main>

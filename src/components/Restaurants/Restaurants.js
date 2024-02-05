@@ -54,7 +54,7 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
     };
 
     return (
-        <main className='main'>
+        <section className='main'>
             <section className='restos__header-container'>
                 <h2 className='restos__header'>Restaurant Options near {venueName}</h2>
                 <h2 className='restos__subheader'>Please choose a restaurant</h2>
@@ -97,7 +97,7 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
                 )
                 })}
             </section>
-        </main>
+        </section>
     )
 };
 
