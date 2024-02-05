@@ -176,7 +176,7 @@ function ItineraryFormPage() {
             const response = await axios.put(
                 `http://localhost:8080/api/forms/${storedFormId}`,
                 updatedForm
-            );
+                );
             console.log(response.data);
             return response;
         } catch (error) {
@@ -192,15 +192,15 @@ function ItineraryFormPage() {
                 ...form,
                 parking_id: parkingId,
                 resto_id: restoId,
-                venue_id: venueId
+                venue_id: venueId,
             }
             console.log('All form options submitted: ', updatedForm);
 
-            const newId = await postNewForm(updatedForm); 
-            setFormId(newId);
-
-            const updatedId = await updateLastForm(updatedForm);
-            setFormId(updatedId);
+            if (storedFormId) {
+                await updateLastForm(updatedForm);
+            } else {
+                await postNewForm(updatedForm); 
+            }
 
             setShowSuccessMessage(true);
 
