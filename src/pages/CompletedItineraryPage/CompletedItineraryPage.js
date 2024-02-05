@@ -147,7 +147,7 @@ function CompletedItineraryPage() {
                     </div>
                 </article>
                 <article className='itin__final-dest'>
-                    <div className='itin__dest-point'></div>
+                    <div className='itin__dest-point--final'></div>
                     <div className='itin__content'>
                         <h3 className='itin__header'>{formatTime(preferredTime)}</h3>
                         <h3 className='itin__header'>Arrive at {venueName}</h3>
@@ -155,6 +155,10 @@ function CompletedItineraryPage() {
                         <h3 className='itin__header'>Have a great time at your event!</h3>
                     </div>
                 </article>
+            </section>
+            <section className='completed__buttons'>
+                <Link to='/' className='completed__home'>Home Page</Link>
+                <Link to='/form' className='completed__back'>Change Form</Link>
             </section>
         </main>
     )

@@ -18,6 +18,52 @@
         margin: 1rem 1.5rem;
         @include flex-column;
     }
+
+    &__buttons {
+        padding: 1.25rem 1rem;
+        @include flex-column;
+        align-items: center;
+    }
+
+    &__home {
+        margin-bottom: 1rem;
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 1rem;
+        background-color: $button-grey;
+        color: $text-blue;
+        border: 1px solid $text-grey;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__home:hover {
+        background-color: $background-blue;
+        color: $text-grey;
+    }
+
+    &__back {
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 1rem;
+        background-color: $button-grey;
+        color: $text-red;
+        border: 1px solid $background-red;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__back:hover {
+        background-color: $background-red;
+        color: $text-grey;
+        border: 1px solid $text-grey;
+    }
 }
 
 .itin {
@@ -47,6 +93,17 @@
         position: absolute;
         top: 0;
         left: -8px;
+
+        &--final {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            border: 1px solid $text-grey;
+            background-color: $background-red;
+            position: absolute;
+            top: 0;
+            left: -11px;
+        }
     }
 
     &__content {
