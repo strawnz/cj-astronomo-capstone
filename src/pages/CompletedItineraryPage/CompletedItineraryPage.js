@@ -101,6 +101,10 @@ function CompletedItineraryPage() {
         const venueImage = `http://localhost:8080${latestFormInfo.venue_info.image_path}`;
         const preferredTime = latestFormInfo.latest_form.preferred_time;
         const formId = latestFormInfo.latest_form.id;
+        const optionalParking = latestFormInfo.latest_form.option_parking;
+        const optionalRestaurant = latestFormInfo.latest_form.option_restaurant;
+
+        console.log('optional Restaurant', optionalRestaurant);
 
     return (
         <main className='main'>
@@ -111,6 +115,8 @@ function CompletedItineraryPage() {
                 </h2>
             </section>
             <section className='completed__itinerary-container'>
+                {optionalParking !== "no" && (
+                <>
                 <article className='itin__pit-stop'>
                     <div className='itin__dest-point'></div>
                     <div className='itin__content'>
@@ -128,6 +134,8 @@ function CompletedItineraryPage() {
                         <p className='itin__info--sm'>Approximately {restoDuration} minutes</p>
                     </div>
                 </article>
+                </>
+                )}
                 <article className='itin__pit-stop'>
                     <div className='itin__dest-point'></div>
                     <div className='itin__content'>

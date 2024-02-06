@@ -17,7 +17,7 @@ function ItineraryFormPage() {
     const [startDate, setStartDate] = useState(new Date());
     const [time, setTime] = useState('12:00');
     const [parkingChoice, setParkingChoice] = useState('');
-    const [parkingId, setParkingId] = useState('');
+    const [parkingId, setParkingId] = useState(1);
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
     const [restoId, setRestoId] = useState('');
@@ -146,7 +146,8 @@ function ItineraryFormPage() {
             option_parking: parkingChoice,
         }));
         console.log('Parking Id from Parking component: ', selectedParkingId);
-        setParkingId(selectedParkingId);
+        console.log('Parking Id if parkingChoice is no: ', parkingId);
+        setParkingId(parkingChoice === 'no' ? 0 : selectedParkingId);
     };
 
     const handleRestoSelection = async (priceChoice, selectedRestoId) => {
@@ -207,7 +208,7 @@ function ItineraryFormPage() {
             setTimeout(() => {
                 setShowSuccessMessage(false);
                 toCompletedItinerary("/completed");
-            }, 4000)
+            }, 3500)
 
         } catch (error) {
             console.log("Form submission error: ", error);
