@@ -28,15 +28,12 @@ function ItineraryFormPage() {
 
   const params = useParams();
   const storedFormId = params.formId;
-  console.log("Form Id: ", formId);
-  console.log("Start Date: ", startDate);
 
   useEffect(() => {
     const storedForm = async () => {
       try {
         const fetchStoredForm = await axios.get(`
                 http://localhost:8080/api/forms/${storedFormId}`);
-        console.log("Fetch stored form: ", fetchStoredForm);
         setForm(fetchStoredForm);
         setVenueName(fetchStoredForm.data.venue_name);
         setStartDate(new Date(fetchStoredForm.data.event_date));
@@ -63,7 +60,6 @@ function ItineraryFormPage() {
       ...form,
       venue_name: selectedVenueName,
     }));
-    console.log(selectedVenueName); // remove this eventually
   };
 
   useEffect(() => {
@@ -71,7 +67,6 @@ function ItineraryFormPage() {
       try {
         const venueIdResponse = await axios.get(`
                 http://localhost:8080/api/venues/name/${venueName}`);
-        console.log("Venue ID Response: ", venueIdResponse.data.id); // remove this eventually
         setVenueId(venueIdResponse.data.id);
       } catch (error) {
         console.log("Unable to retrieve venue Id: ", error);
@@ -88,7 +83,6 @@ function ItineraryFormPage() {
       month: "2-digit",
       day: "2-digit",
     });
-    console.log("formattedDate: ", formattedDate);
 
     const formattedTime = date.toLocaleTimeString("en-CA", {
       hour: "2-digit",
@@ -96,7 +90,6 @@ function ItineraryFormPage() {
       second: "2-digit",
       hour12: false,
     });
-    console.log("formattedTime: ", formattedTime);
 
     const formattedDateTime = `${formattedDate} ${formattedTime}`;
 
@@ -104,7 +97,6 @@ function ItineraryFormPage() {
       ...form,
       event_date: formattedDateTime,
     }));
-    console.log(date); // remove this eventually
     setStartDate(date);
   };
   const changeTime = (time) => {
@@ -112,7 +104,6 @@ function ItineraryFormPage() {
       ...form,
       preferred_time: time,
     }));
-    console.log(time); // remove this eventually
     setTime(time);
   };
   const changeParking = (event) => {
@@ -120,7 +111,6 @@ function ItineraryFormPage() {
       ...form,
       option_parking: event.target.value,
     }));
-    console.log(event.target.value); // remove this eventually
     setParkingChoice(event.target.value);
   };
   const changeEat = (event) => {
@@ -128,7 +118,6 @@ function ItineraryFormPage() {
       ...form,
       option_restaurant: event.target.value,
     }));
-    console.log(event.target.value); // remove this eventually
     setEatChoice(event.target.value);
   };
   const changePrice = (event) => {
@@ -136,7 +125,6 @@ function ItineraryFormPage() {
       ...form,
       option_price: event.target.value,
     }));
-    console.log(event.target.value); // remove this eventually
     setPriceChoice(event.target.value);
   };
 
@@ -145,8 +133,6 @@ function ItineraryFormPage() {
       ...form,
       option_parking: parkingChoice,
     }));
-    console.log("Parking Id from Parking component: ", selectedParkingId);
-    console.log("Parking Id if parkingChoice is no: ", parkingId);
     setParkingId(selectedParkingId);
   };
 
@@ -155,7 +141,6 @@ function ItineraryFormPage() {
       ...form,
       option_price: priceChoice,
     }));
-    console.log("Resto Id from Restaurant component: ", selectedRestoId);
     setRestoId(selectedRestoId);
   };
 
@@ -165,7 +150,6 @@ function ItineraryFormPage() {
         "http://localhost:8080/api/forms",
         newForm
       );
-      console.log(response.data); // remove this eventually
       return response;
     } catch (error) {
       console.log("Error posting form: ", error);
@@ -195,7 +179,6 @@ function ItineraryFormPage() {
         resto_id: restoId,
         venue_id: venueId,
       };
-      console.log("All form options submitted: ", updatedForm);
 
       if (storedFormId) {
         await updateLastForm(updatedForm);

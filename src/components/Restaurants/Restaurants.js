@@ -4,8 +4,6 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
-    console.log("Venue Id from Itinerary Form to Restaurants: ", venueId); // remove this eventually
-    console.log("Price Choice from Itinerary Form to Restaurants: ", priceChoice); // remove this eventually
     const [restoOptions, setRestoOptions] = useState([]);
     const [restoInfo, setRestoInfo] = useState([]);
     const [selectedRestoId, setSelectedRestoId] = useState(restoId);
@@ -16,7 +14,6 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
             const response = await axios.get(`
                 http://localhost:8080/api/restos-venues/by-venue?venue_id=${venueId}&price_level=${priceChoice}`);
             setRestoOptions(response.data);
-            console.log("Restaurant options by venue ID and price level: ", response.data); // remove this eventually
           } catch (error) {
             console.log("Error fetching restaurant options: ", error);
           }
@@ -37,7 +34,6 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
 
                 const restoInfoArray = await Promise.all(promises)
                 setRestoInfo(restoInfoArray);
-                console.log("Restaurant info from options: ", restoInfoArray); // remove this eventually
             } catch (error) {
                 console.log("Error fetching restaurant info: ", error);
             }
@@ -48,7 +44,6 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
     }, [restoOptions]);
     
     const handleRestoSelection = (restoId) => {
-        console.log('Selected Resto ID: ', restoId);
         setSelectedRestoId(restoId);
         onSelect(restoId);
     };
