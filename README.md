@@ -17,112 +17,137 @@ Planning the journey to a live event such as a concert, theatre show or sports g
 
 ### Features
 
-- As a user, I want to be able to map my route from any given location to the event venue based on my desired arrival time 
-- As a user, I want the flexibility to choose my preferred mode(s) of transportation to the venue, whether it's driving, public transit, walking or biking
-- As a user, I want to be able to consider parking options if I choose to drive within a 1.6km or 1-mile radius of the venue
+- As a user, I want to be able to map my route from a selected parking lot or selected restaurant to the event venue based on my desired arrival time 
+- As a user, I want to be able to consider parking options if I choose to drive within a 1.6km radius (equivalent to 1-mile) of the venue
 - As a user, I want to be able to select a parking lot from the options if I choose to drive and add it to the itinerary
-- As a user, I want to be able to search for restaurant options if I want to eat before the event within a 1.6km or 1-mile radius of the venue
+- As a user, I want to be able to search for restaurant options if I want to eat before the event within a 1.6km radius (equivalent to 1-mile) of the venue
 - As a user, I want to be able to select a restaurant from the options if I want to eat before the event and add it to the itinerary
-- As a user, I want to be able to dynamically calculate the total distance and time required for the entire journey, factoring in all selected pre-event locations
-- As a user, I want to be able to receive a detailed itinerary that includes transportation details, parking information (if needed), selected restaurant, and estimated arrival times at each location **
+- As a user, I want to be able to dynamically calculate the total time required for the entire journey, factoring in all selected pre-event locations
+- As a user, I want to be able to receive a detailed itinerary that includes parking information (if desired), selected restaurant, and estimated arrival times at each location
 
 ## Implementation
+
+### Installation
+Download the client repository from GitHub:
+https://github.com/strawnz/cj-astronomo-capstone
+
+Download the server repository from GitHub:
+https://github.com/strawnz/cj-astronomo-capstone-api
+
+Once both repositories are downloaded locally, npm install the libraries below.
 
 ### Tech Stack
 
 - React
-- Express (TBD)
+- Express
 - Client libraries:
     - react
     - react-router-dom
     - axios
     - sass
-- Server libraries (TBD):
+    - react-datepicker
+    - react-time-picker
+- Server libraries:
     - express
     - nodemon
     - cors
     - dotenv
+    - mysql2
+    - knex
 
 ### APIs
 
-- This project will use the Google Maps Platform API
+- This project uses a custom API built in Express
 
 ### Sitemap
 
 - Home page
 - Build itinerary form
-- Parking options
-- Restaurant options 
 - Completed itinerary
 
 ### Mockups 
 
 #### Home Page
-![handdrawn mockup of homepage](/cj-astronomo-capstone/src/assets/readme/HomePage.jpg)
+![screenshot of homepage](/src/assets/readme/HomePage.JPG)
 
 #### Build Itinerary Form Page
-![handdrawn mockup of build itinerary form page](/cj-astronomo-capstone/src/assets/readme/BuildItineraryForm.jpg)
+![screenshot of build itinerary form page](/src/assets/readme/BuildItineraryForm.JPG)
 
-#### Parking Options Page
-![handdrawn mockup of parking options page](/cj-astronomo-capstone/src/assets/readme/ParkingOptions.jpg)
+#### Parking Options Component (rendered on form page if 'Yes' is selected)
+![screenshot of parking options component](/src/assets/readme/ParkingOptions.JPG)
 
-#### Restaurant Options Page
-![handdrawn mockup of restaurant options page](/cj-astronomo-capstone/src/assets/readme/RestaurantOptions.jpg)
+#### Restaurant Options Component (rendered on form page if 'Yes' and a price level is selected)
+![screenshot of restaurant options component](/src/assets/readme/RestaurantOptions.JPG)
 
 #### Completed Itinerary Page
-![handdrawn mockup of completed itinerary page](/cj-astronomo-capstone/src/assets/readme/CompletedItinerary.jpg)
+![screenshot of completed itinerary page](/src/assets/readme/CompletedItineraryPage.JPG)
 
 ### Data
 
-Currently N/A for the first version of this project
+This project uses a custom database with 6 tables and multiple endpoints.
 
-### Endpoints
+Tables:
+    
+    - Venues: lists 10 of the most popular live event venues in Toronto
 
-Currently N/A for the first version of this project
+    - Restaurants: includes restaurant details such as cuisine type, price level, website
+
+    - Restaurants/Venues: include distance and time information between each restaurant and a specific venue
+
+    - Parking: includes parking lot details such as address, distance and time information related to a specific venue
+
+    - Parking/Restaurants: includes distance and time information between each parking lot and a specific restaurant
+
+    - Forms: stores choices that the user selects when a form is submitted
 
 ### Auth
 
 Currently N/A for the first version of this project
 
-## Roadmap
+### Usage
 
-- Create client
-    - react project with routes and boilerplate pages
+Initiate npm start on the server before initiating npm start on the client.
 
-- Test Google Maps API(s)
-    - read documentation and test APIs in Postman
+The client is best viewed on a mobile screen size of 320px x 568px or a desktop screen size of 1920px x 1080px.
 
-- Set up global styles, mixins, variables, and typography
+Please note that the database is still a work in progress. To successfully use the current version of the application, follow the user map below.
 
-- Feature: Home Page
+#### Usermap
+- From the Home page, click the START button
 
-- Feature: Build Itinerary Form Page
-    - Add form input
-    - Create optional route to Parking Options page
-    - Create optional route to Restaurant Options page
+- On the Build Itinerary Form page:
+    - Select BMO Field as a venue
+    - Choose any current or future date 
+    - Input any preferred time (e.g. 7:30 PM)
+    - Choose 'Yes' that you would like to park near the venue
+    - Choose the first parking option (defaulted in a blue card)
+    - Choose 'Yes' that you would like to eat near the venue
+    - Choose any price range 
+    - Choose any restaurant
+    - Click the Submit button
 
-- Feature: Parking Options Page
-    - Add form selection
-    - Create optional route to Restaurant Options page
+- On the Completed Itinerary page:
+    - Review that the itinerary has incorporated your choices
+    - You will also have the option to change your answers in the form (currently needs further debugging)
+    - You also have the option to return to the Home page
 
-- Feature: Restaurant Options Page
-    - Add form selection
+## Lessons Learned
 
-- Feature: Completed Itinerary Page
-    - Output results from user selection
+I have learned many things while trying to execute the first sprint in this ambitious project within a limited amount of time. 
+Some of the key takeaways include:
 
-- Bug fixes
+    - How to pivot and reconsider the scope of this project once I realized that my initial hopes of using the Google Maps API was going to require more time for research and testing before implementation
 
-- In-Class Presentations
+    - Have a robust map of how to structure data tables, especially when they include many-to-many relationships
 
-- Final tweaks
+    - Ensure that any imported third-party libraries has comprehensive documentation to ease any potential troubleshooting
 
-- DEMO DAY
+    - Ensure that if using date or time values, that they can adhere to CRUD operations between the client and server 
 
-## Nice-to-haves
+## Next Steps
 
-- Create animated Loading Page before navigating to the Completed Itinerary Page
+- Continue fleshing out the database (goal to complete by Demo Day)
+- Incorporate Google Maps API so a user can select any venue of their choosing
 - Sync itinerary to a user's calendar 
-- Ability to share itinerary with other people's calendars or via a link
+- Ability to share the itinerary with other people's calendars or via a link
 - Ability to save restaurant and parking lot options for future reference
-- Integrate a weather app widget
