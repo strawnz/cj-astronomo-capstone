@@ -24,7 +24,7 @@ function HomePage() {
                 </div>
                 <div className='home__paragraph-container'> 
                     <p className='home__body'>
-                        Select from our curated list of the city's top 10 venues, and let PEP
+                        Select from our curated list of the city's top 10 venues and let PEP
                         handle the details. We recommend nearby parking and dining options, 
                         and calculate the perfect travel times for a stress-free journey to
                         your concert, sports event or theatre show. 

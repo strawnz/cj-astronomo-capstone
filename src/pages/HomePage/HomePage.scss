@@ -13,7 +13,7 @@
 
         @include desktop {
             display: flex;
-            height: 40vh;
+            height: 31.5vh;
         }
     }
 
@@ -30,7 +30,7 @@
         @include desktop {
             width: 33.3%;
             position: relative;
-            height: 40vh;
+            height: 31.5vh;
         }
     }
 
@@ -47,7 +47,7 @@
         @include desktop {
             width: 33.4%;
             position: relative;
-            height: 40vh;
+            height: 31.5vh;
             top: 0;
         }
     }
@@ -64,16 +64,19 @@
         @include desktop {
             width: 33.3%;
             position: relative;
-            height: 40vh;
+            height: 31.5vh;
             top: 0;
         }
     }
-
 }
 
 .home {
     &__container {
         padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 1.5rem 39rem 2rem 40rem;
+        }
     }
 
     &__header {
@@ -110,6 +113,11 @@
         border-radius: 1.5rem;
         display: flex;
         align-items: center;
+
+        @include desktop {
+            height: 3rem;
+            margin-bottom: 1rem;
+        }
     }
 
     &__button:hover {
