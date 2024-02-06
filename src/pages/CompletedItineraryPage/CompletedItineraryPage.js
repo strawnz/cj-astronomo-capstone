@@ -184,7 +184,7 @@ function CompletedItineraryPage() {
                 </article>
                 </>
                 )}
-                {optionalParking !== "no" && (
+                {optionalParking !== "no" && optionalRestaurant === "no" && (
                     <>
                     <article className='itin__pit-stop'>
                         <div className='itin__dest-point'></div>
@@ -209,9 +209,9 @@ function CompletedItineraryPage() {
                     <div className='itin__dest-point--final'></div>
                     <div className='itin__content'>
                         <h3 className='itin__header'>{formatTime(preferredTime)}</h3>
-                        <h3 className='itin__header'>Arrive at {venueName}</h3>
+                        <h3 className='itin__subheader'>Arrive at {venueName}</h3>
                         <img src={venueImage} className='itin__image' alt={venueName}/>
-                        <h3 className='itin__header'>Have a great time at your event!</h3>
+                        <h3 className='itin__header--final'>Have a great time at your event!</h3>
                     </div>
                 </article>
             </section>
