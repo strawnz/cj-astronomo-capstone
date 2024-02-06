@@ -97,7 +97,7 @@ function CompletedItineraryPage() {
         const restoDuration = latestFormInfo.parking_resto_info.duration_resto;
         const venueName = latestFormInfo.venue_info.venue_name;
         const venueAddress = latestFormInfo.venue_info.address;
-        const venueDuration = latestFormInfo.resto_venue_info.duration_venue;
+        const venueDurationFromResto = latestFormInfo.resto_venue_info.duration_venue;
         const venueImage = `http://localhost:8080${latestFormInfo.venue_info.image_path}`;
         const preferredTime = latestFormInfo.latest_form.preferred_time;
         const formId = latestFormInfo.latest_form.id;
@@ -136,6 +136,8 @@ function CompletedItineraryPage() {
                 </article>
                 </>
                 )}
+                {optionalRestaurant !== "no" && (
+                <>
                 <article className='itin__pit-stop'>
                     <div className='itin__dest-point'></div>
                     <div className='itin__content'>
@@ -152,9 +154,11 @@ function CompletedItineraryPage() {
                         <h3 className='itin__header'>{formatTime(restoToVenueTime)}</h3>
                         <h4 className='itin__subheader'>Walk to {venueName}</h4>
                         <p className='itin__info'>{venueAddress}</p>
-                        <p className='itin__info--sm'>Approximately {venueDuration} minutes</p>
+                        <p className='itin__info--sm'>Approximately {venueDurationFromResto} minutes</p>
                     </div>
                 </article>
+                </>
+                )}
                 <article className='itin__final-dest'>
                     <div className='itin__dest-point--final'></div>
                     <div className='itin__content'>

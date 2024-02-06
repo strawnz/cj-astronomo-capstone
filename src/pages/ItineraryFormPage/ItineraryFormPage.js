@@ -15,12 +15,12 @@ function ItineraryFormPage() {
     const [venueName, setVenueName] = useState('');
     const [venueId, setVenueId] = useState('');
     const [startDate, setStartDate] = useState(new Date());
-    const [time, setTime] = useState('12:00');
+    const [time, setTime] = useState('');
     const [parkingChoice, setParkingChoice] = useState('');
     const [parkingId, setParkingId] = useState(1);
     const [eatChoice, setEatChoice] = useState('');
     const [priceChoice, setPriceChoice] = useState('');
-    const [restoId, setRestoId] = useState('');
+    const [restoId, setRestoId] = useState(1);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [formId, setFormId] = useState('');
 
@@ -147,7 +147,7 @@ function ItineraryFormPage() {
         }));
         console.log('Parking Id from Parking component: ', selectedParkingId);
         console.log('Parking Id if parkingChoice is no: ', parkingId);
-        setParkingId(parkingChoice === 'no' ? 0 : selectedParkingId);
+        setParkingId(selectedParkingId);
     };
 
     const handleRestoSelection = async (priceChoice, selectedRestoId) => {
