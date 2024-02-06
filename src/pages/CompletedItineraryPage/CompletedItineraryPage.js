@@ -17,7 +17,6 @@ function CompletedItineraryPage() {
             try {
                 const response = await axios.get(`
                 http://localhost:8080/api/forms/last-updated`);
-                console.log("Latest form info: ", response.data); // remove this eventually
                 setLatestFormInfo(response.data);
             } catch (error) {
                 console.log("Error fetching latest form info: ", error);
@@ -27,11 +26,8 @@ function CompletedItineraryPage() {
     }, []);
 
     const calculateTimeBackwards = (startTime, duration) => {
-        // console.log("calculateTimeBackwards - startTime: ", startTime);
         const time = new Date(`2024-01-01T${startTime}`);
-        // console.log("calculateTimeBackwards - time before adjustment: ", time);
         time.setMinutes(time.getMinutes() - duration);
-        // console.log("calculateTimeBackwards - time after adjustment: ", time);
         return time.toLocaleTimeString('en-GB'); 
     }
 
@@ -41,39 +37,32 @@ function CompletedItineraryPage() {
                 latestFormInfo.latest_form.preferred_time,
                 latestFormInfo.resto_venue_info.duration_venue
             );
-            console.log("Time from Resto to Venue: ", calculateRestoToVenueTime); // remove this eventually
             setRestoToVenueTime(calculateRestoToVenueTime);
         }
     }, [latestFormInfo]); 
     
     useEffect(() => {
-        console.log("Resto to Venue Time in useEffect: ", restoToVenueTime);
         if (restoToVenueTime) {
             const calculateTimeAtResto = calculateTimeBackwards(
                 restoToVenueTime, 90);
-            console.log("Time at Resto: ", calculateTimeAtResto);
             setTimeAtResto(calculateTimeAtResto);
         }
     }, [restoToVenueTime]); 
 
     useEffect(() => {
-        console.log("Time spent at Resto in useEffect: ", timeAtResto);
         if (timeAtResto) {
             const calculateParkingToRestoTime = calculateTimeBackwards(
                 timeAtResto, latestFormInfo.parking_resto_info.duration_resto
             );
-            console.log("Time from Parking to Resto: ", calculateParkingToRestoTime);
             setParkingToRestoTime(calculateParkingToRestoTime);
         }
     }, [timeAtResto]);
 
     useEffect(() => {
-        console.log("Parking to Resto Time in useEffect: ", parkingToRestoTime);
         if (parkingToRestoTime) {
             const calculateFindParkingTime = calculateTimeBackwards(
                 parkingToRestoTime, 5
             );
-            console.log("Time to Find Parking: ", calculateFindParkingTime);
             setFindParkingTime(calculateFindParkingTime);
         }
     }, [parkingToRestoTime]);
@@ -84,18 +73,15 @@ function CompletedItineraryPage() {
                 latestFormInfo.latest_form.preferred_time,
                 latestFormInfo.parking_info.duration_venue
             );
-            console.log("Time from Parking to Venue: ", calculateParkingToVenueTime); // remove this eventually
             setParkingToVenueTime(calculateParkingToVenueTime);
         }
     }, [latestFormInfo])
 
     useEffect(() => {
-        console.log("Parking to Venue Time in useEffect: ", parkingToVenueTime);
         if (parkingToVenueTime) {
             const calculateFindParkingNoRestoTime = calculateTimeBackwards(
                 parkingToVenueTime, 5
             );
-            console.log("Time to Find Parking (no resto): ", calculateFindParkingNoRestoTime);
             setFindParkingNoRestoTime(calculateFindParkingNoRestoTime);
         }
     }, [parkingToVenueTime]);
@@ -128,8 +114,6 @@ function CompletedItineraryPage() {
         const formId = latestFormInfo.latest_form.id;
         const optionalParking = latestFormInfo.latest_form.option_parking;
         const optionalRestaurant = latestFormInfo.latest_form.option_restaurant;
-
-        console.log('optional Restaurant', optionalRestaurant);
 
     return (
         <main className='main'>

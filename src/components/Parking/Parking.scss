@@ -17,59 +17,13 @@
     &__card-container {
         margin-bottom: 2rem;
     }
-
-    &__buttons {
-        padding: 1.25rem 1rem;
-        @include flex-column;
-        align-items: center;
-    }
-
-    &__submit {
-        margin-bottom: 1rem;
-        @include links-buttons;
-        width: 50%;
-        height: 2.5rem;
-        padding: 0 2rem;
-        background-color: $button-grey;
-        color: $text-blue;
-        border: 1px solid $text-grey;
-        border-radius: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    &__submit:hover {
-        background-color: $background-blue;
-        color: $text-grey;
-    }
-
-    &__back {
-        @include links-buttons;
-        width: 50%;
-        height: 2.5rem;
-        padding: 0 2rem;
-        background-color: $button-grey;
-        color: $text-red;
-        border: 1px solid $background-red;
-        border-radius: 1.5rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    &__back:hover {
-        background-color: $background-red;
-        color: $text-grey;
-        border: 1px solid $text-grey;
-    }
 }
 
 .park-card {
     margin: 1rem 0;
     padding: 1.25rem 1rem;
-    border: 2px solid $text-grey;
-    border-radius: 10px;
+    border: 0.125rem solid $text-grey;
+    border-radius: 0.625rem;
 
     &__address {
         @include body-lg;
@@ -89,11 +43,11 @@
     }
 
     &.selected {
-        border: 2px solid $text-grey;
+        border: 0.125rem solid $text-grey;
         background-color: $background-blue;
     }
 
     &:hover {
-        box-shadow: 2px 1px 3px 3px $text-grey;
+        box-shadow: 0.125rem 0.0625rem 0.1875rem 0.1875rem $text-grey;
     }
 }

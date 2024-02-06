@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Parking({ venueId, venueName, onSelect, parkingId }) {
-  console.log("Venue Id from Itinerary Form to Parking: ", venueId);
   const [parkingOptions, setParkingOptions] = useState([]);
   const [selectedParkingId, setSelectedParkingId] = useState(parkingId);
 
@@ -13,7 +12,6 @@ function Parking({ venueId, venueName, onSelect, parkingId }) {
         const response = await axios.get(`
                 http://localhost:8080/api/parking/by-venue?venue_id=${venueId}`);
         setParkingOptions(response.data);
-        console.log("Parking options by venue Id: ", response.data); // remove this eventually
       } catch (error) {
         console.log("Error fetching parking options: ", error);
       }
@@ -24,7 +22,6 @@ function Parking({ venueId, venueName, onSelect, parkingId }) {
   }, [venueId]);
 
   const handleParkingSelection = (parkingId) => {
-    console.log('Selected Parking ID: ', parkingId);
     setSelectedParkingId(parkingId);
     onSelect(parkingId);
   };

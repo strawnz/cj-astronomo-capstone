@@ -43,7 +43,7 @@
         padding: 0 1rem;
         background-color: $button-grey;
         color: $text-blue;
-        border: 1px solid $text-grey;
+        border: 0.0625rem solid $text-grey;
         border-radius: 1.5rem;
         display: flex;
         justify-content: center;
@@ -133,7 +133,7 @@
         .react-time-picker__button {
             position: absolute;
             right: 0;
-            top: 22px;
+            top: 1.375rem;
         }
 
         .react-time-picker__inputGroup {
