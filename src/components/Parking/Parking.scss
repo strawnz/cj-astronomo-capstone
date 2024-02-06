@@ -1,0 +1,53 @@
+@use '../../styles/partials/global.scss' as *;
+
+.parking {
+    &__header-container {
+        padding: 0;
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+
+    &__card-container {
+        margin-bottom: 2rem;
+    }
+}
+
+.park-card {
+    margin: 1rem 0;
+    padding: 1.25rem 1rem;
+    border: 0.125rem solid $text-grey;
+    border-radius: 0.625rem;
+
+    &__address {
+        @include body-lg;
+        margin-bottom: 0.5rem;
+    }
+
+    &__distance {
+        margin-bottom: 0.5rem;
+    }
+
+    &__card-header {
+        @include body-med;
+    }
+
+    &__info {
+        @include body-med;
+    }
+
+    &.selected {
+        border: 0.125rem solid $text-grey;
+        background-color: $background-blue;
+    }
+
+    &:hover {
+        box-shadow: 0.125rem 0.0625rem 0.1875rem 0.1875rem $text-grey;
+    }
+}

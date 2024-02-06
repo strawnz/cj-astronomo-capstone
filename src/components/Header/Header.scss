@@ -1,0 +1,22 @@
+@use '../../styles/partials/global.scss' as *;
+
+.header {
+    background-color: $background-blue;
+    padding: 1.25rem 1rem;
+    display: flex;
+    justify-content: center;
+
+    @include desktop {
+        padding: 1.5rem;
+    }
+}
+
+.logo {
+    &__grey {
+        width: 100%;
+
+        @include desktop {
+            width: 125%;
+        }
+    }
+}

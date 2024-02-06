@@ -1,0 +1,83 @@
+@use './variables.scss' as *;
+
+@mixin tablet {
+    @media screen and (min-width: $tablet-breakpoint) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}
+
+@mixin no-margin-padding {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin page-header {
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+
+    @include desktop {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+}
+
+@mixin subheader {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+    @include desktop {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+
+@mixin body-lg {
+    font-size: 0.9375rem;
+    line-height: 1.75rem;
+}
+
+@mixin body-med {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+
+    @include desktop {
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
+}
+
+@mixin body-sm {
+    font-size: 0.7rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+
+    @include desktop {
+        font-size: 0.8125rem;
+        line-height: 1.5rem;
+    }
+}
+
+@mixin links-buttons {
+    font-weight: 800;
+    font-size: 0.8281rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.1rem;
+
+    @include desktop {
+        font-size: 0.9375rem;
+        line-height: 1.5rem;
+    }
+}

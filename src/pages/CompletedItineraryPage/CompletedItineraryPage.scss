@@ -1,0 +1,181 @@
+@use '../../styles/partials/global.scss' as *;
+
+.completed {
+    &__header-container {
+        padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 2rem 38rem 0 47.75rem;
+        }
+    }
+
+    &__header {
+        @include page-header;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-top: 1rem;
+    }
+
+    &__itinerary-container {
+        margin: 1rem 1.5rem;
+        @include flex-column;
+
+        @include desktop {
+            padding: 2rem 37rem 0 48rem;
+        }
+    }
+
+    &__buttons {
+        padding: 1.25rem 1rem;
+        @include flex-column;
+        align-items: center;
+    }
+
+    &__home {
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        padding: 0 1rem;
+        background-color: $button-grey;
+        color: $text-blue;
+        border: 0.0625rem solid $text-grey;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include desktop {
+            width: 12%;
+            height: 3rem;
+        }
+    }
+
+    &__home:hover {
+        background-color: $background-blue;
+        color: $text-grey;
+    }
+
+    &__back {
+        @include links-buttons;
+        width: 50%;
+        height: 2.5rem;
+        margin-bottom: 1rem;
+        padding: 0 1rem;
+        background-color: $button-grey;
+        color: $text-red;
+        border: 0.0625rem solid $background-red;
+        border-radius: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include desktop {
+            width: 12%;
+            height: 3rem;
+        }
+    }
+
+    &__back:hover {
+        background-color: $background-red;
+        color: $text-grey;
+        border: 0.0625rem solid $text-grey;
+    }
+}
+
+.itin {
+    &__pit-stop {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        border-left: 0.125rem solid $text-grey;
+        position: relative;
+        padding-bottom: 2rem;
+
+        @include desktop {
+            padding-bottom: 3rem;
+        }
+    }
+
+    &__final-dest {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        position: relative;
+        margin-left: 2px;
+    }
+
+    &__dest-point {
+        height: 0.875rem;
+        width: 0.875rem;
+        border-radius: 50%;
+        border: 0.0625rem solid $text-grey;
+        background-color: $background-blue;
+        position: absolute;
+        top: 0;
+        left: -0.5rem;
+
+        &--final {
+            height: 1.25rem;
+            width: 1.25rem;
+            border-radius: 50%;
+            border: 0.0625rem solid $text-grey;
+            background-color: $background-red;
+            position: absolute;
+            top: 0;
+            left: -0.6875rem;
+        }
+    }
+
+    &__content {
+        margin-left: 1.5rem;
+        position: relative;
+    }
+
+    &__header {
+        font-size: 0.9375rem;
+        margin-bottom: 0.25rem;
+
+        @include desktop {
+            margin-bottom: 0.5rem;
+        }
+
+        &--final {
+            @include desktop {
+                font-size: 1.125rem;
+                margin: 0.5rem 0;
+            }
+        }
+    }
+
+    &__subheader {
+        @include body-med;
+    }
+
+    &__info {
+        @include body-med;
+
+        &--sm {
+            font-size: 0.75rem;
+            line-height: 1.25rem;
+            margin-top: 0.25rem;
+
+            @include desktop {
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+            }
+        }
+    }
+
+    &__image {
+        width: 100%;
+        border: 0.125rem solid $text-grey;
+        border-radius: 10px;
+        margin: 0.5rem 0;
+
+        @include desktop {
+            margin: 1rem 0;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@use '../../styles/partials/global.scss' as *;
+
+.footer {
+    &__container {
+        background-color: $background-blue;
+        padding: 1.5rem 1rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__copy {
+        @include body-sm;
+    }
+}

@@ -1,0 +1,130 @@
+@use '../../styles/partials/global.scss' as *;
+
+.main {
+    background-color: $background-grey;
+    color: $text-grey;
+    position: relative;
+}
+
+.hero {
+    &__container {
+        height: 80vh;
+        position: relative;
+
+        @include desktop {
+            display: flex;
+            height: 31.5vh;
+        }
+    }
+
+    &__concert {
+        background-image: url(../../assets/images/concert2.JPG);
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 27vh;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+
+        @include desktop {
+            width: 33.3%;
+            position: relative;
+            height: 31.5vh;
+        }
+    }
+
+    &__sports {
+        background-image: url(../../assets/images/raptors.png);
+        background-position: bottom;
+        background-size: cover;
+        width: 100%;
+        height: 33vh;
+        position: absolute;
+        top: 20vh;
+        z-index: 1;
+
+        @include desktop {
+            width: 33.4%;
+            position: relative;
+            height: 31.5vh;
+            top: 0;
+        }
+    }
+
+    &__theatre {
+        background-image: url(../../assets/images/theatre.jpg);
+        background-position: bottom;
+        background-size: cover;
+        width: 100%;
+        height: 33vh;
+        position: absolute;
+        top: 48vh;
+
+        @include desktop {
+            width: 33.3%;
+            position: relative;
+            height: 31.5vh;
+            top: 0;
+        }
+    }
+}
+
+.home {
+    &__container {
+        padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 1.5rem 39rem 2rem 40rem;
+        }
+    }
+
+    &__header {
+        @include page-header;
+        margin-bottom: 1rem;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-bottom: 0.5rem;
+    }
+
+    &__paragraph-container {
+        padding: 0.25rem 0;
+    }
+
+    &__body {
+        @include body-med;
+    }
+
+    &__button-container {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 1rem;
+    }
+
+    &__button {
+        @include links-buttons;
+        height: 2.5rem;
+        padding: 0 2rem;
+        background-color: $button-grey;
+        color: $text-blue;
+        border: 0.0625rem solid $text-grey;
+        border-radius: 1.5rem;
+        display: flex;
+        align-items: center;
+
+        @include desktop {
+            height: 3rem;
+            width: 10%;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &__button:hover {
+        background-color: $background-blue;
+        color: $text-grey;
+    }
+}
