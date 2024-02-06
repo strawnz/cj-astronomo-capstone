@@ -3,6 +3,10 @@
 .form {
     &__header-container {
         padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 2rem 36rem 2rem 43rem;
+        }
     }
 
     &__header {
@@ -16,11 +20,20 @@
 
     &__container {
         padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 2rem 36rem 2rem 43rem;
+        }
     }
 
     &__venue-container {
         @include flex-column;
         margin-bottom: 1rem;
+    }
+
+    &__button-container {
+        display: flex;
+        justify-content: center;
     }
 
     &__submit {
@@ -35,25 +48,49 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include desktop {
+            width: 30%;
+            margin-top: 1rem;
+        }
     }
 
     &__submit:hover {
         background-color: $background-blue;
         color: $text-grey;
     }
+
+    &__success {
+        @include flex-column;
+        align-items: center;
+    }
+
+    &__success-copy {
+        margin-bottom: 1rem;
+    }
 }
 
 .venue-list {
     &__drop-down {
         width: 100%;
-        height: 2rem;
+        height: 2.5rem;
         display: block;
+        font-family: 'Raleway';
+        font-weight: 600;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        padding-left: 0.5rem;
+        @include body-med;
+    }
+
+    &__drop-down-option {
+        font-weight: 600;
     }
 }
 
 .date-picker {
     &__container {
-        margin-bottom: 1rem;
+        margin-bottom: 2.5rem;
     }
 
     &__widget-container {
@@ -64,8 +101,13 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 2rem;
-        
+        height: 2.5rem;
+        font-family: 'Raleway';
+        font-weight: 600;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+        padding-left: 0.5rem;
+        @include body-med;
     }
 }
 
@@ -73,6 +115,7 @@
     flex-grow: 1;
     width: 100%;
     height: 2rem;
+    border-radius: 0.5rem;
 }
 
 .time-picker {
@@ -83,13 +126,62 @@
     &__widget {
         width: 100%;
 
+        .react-time-picker__wrapper {
+            border: none;
+        }
+
+        .react-time-picker__button {
+            position: absolute;
+            right: 0;
+            top: 22px;
+        }
+
+        .react-time-picker__inputGroup {
+            background-color: #FFF;
+            height: 2.5rem;
+            font-family: 'Raleway';
+            font-weight: 600;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            padding-left: 0.5rem;
+        }
+
         .react-time-picker__inputGroup__input {
             width: 80%;
         }
 
+        .react-time-picker__inputGroup__hour {
+            color: black;
+            font-family: 'Raleway';
+            font-weight: 600;
+            @include body-med;
+        }
+
+        .react-time-picker__inputGroup__hour::placeholder  {
+            color: black;
+            font-family: 'Raleway';
+            font-weight: 600;
+        }
+
+        .react-time-picker__inputGroup__minute {
+            color: black;
+            font-family: 'Raleway';
+            font-weight: 600;
+            @include body-med;
+        }
+
+        .react-time-picker__inputGroup__minute::placeholder  {
+            color: black;
+            font-family: 'Raleway';
+            font-weight: 600;
+        }
+
         .react-time-picker__inputGroup__amPm {
-            width: 20%;
+            width: 10%;
             text-align: center;
+            color: black;
+            font-family: 'Raleway';
+            font-weight: 600;
         }
     }
 }
@@ -105,5 +197,23 @@
 
     &__price-container {
         margin-bottom: 1rem;
+    }
+
+    &__two-options, &__three-options {
+        margin: 1rem 0 2rem;
+    }
+
+    &__parking-yes, &__resto-yes, &__price-1 {
+        margin-right: 0.5rem;
+    }
+
+    &__parking-no, &__resto-no {
+        margin-left: 3.75rem;
+        margin-right: 0.5rem;
+    }
+
+    &__price-2, &__price-3 {
+        margin-left: 4.75rem;
+        margin-right: 0.5rem;
     }
 }
