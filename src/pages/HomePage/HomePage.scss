@@ -10,6 +10,11 @@
     &__container {
         height: 80vh;
         position: relative;
+
+        @include desktop {
+            display: flex;
+            height: 40vh;
+        }
     }
 
     &__concert {
@@ -21,6 +26,12 @@
         position: absolute;
         top: 0;
         z-index: 2;
+
+        @include desktop {
+            width: 33.3%;
+            position: relative;
+            height: 40vh;
+        }
     }
 
     &__sports {
@@ -32,6 +43,13 @@
         position: absolute;
         top: 20vh;
         z-index: 1;
+
+        @include desktop {
+            width: 33.4%;
+            position: relative;
+            height: 40vh;
+            top: 0;
+        }
     }
 
     &__theatre {
@@ -42,7 +60,15 @@
         height: 33vh;
         position: absolute;
         top: 48vh;
+
+        @include desktop {
+            width: 33.3%;
+            position: relative;
+            height: 40vh;
+            top: 0;
+        }
     }
+
 }
 
 .home {
@@ -53,6 +79,15 @@
     &__header {
         @include page-header;
         margin-bottom: 1rem;
+    }
+
+    &__subheader {
+        @include subheader;
+        margin-bottom: 0.5rem;
+    }
+
+    &__paragraph-container {
+        padding: 0.25rem 0;
     }
 
     &__body {
