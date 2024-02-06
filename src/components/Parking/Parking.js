@@ -2,10 +2,10 @@ import "./Parking.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Parking({ venueId, venueName, onSelect }) {
+function Parking({ venueId, venueName, onSelect, parkingId }) {
   console.log("Venue Id from Itinerary Form to Parking: ", venueId);
   const [parkingOptions, setParkingOptions] = useState([]);
-  const [selectedParkingId, setSelectedParkingId] = useState(null);
+  const [selectedParkingId, setSelectedParkingId] = useState(parkingId);
 
   useEffect(() => {
     const fetchParkingOptions = async () => {
@@ -30,7 +30,7 @@ function Parking({ venueId, venueName, onSelect }) {
   };
 
   return (
-    <main className="main">
+    <section className="main">
       <section className="parking__header-container">
         <h2 className="parking__header">Parking Options near {venueName}</h2>
         <h2 className="parking__subheader">Please choose a parking lot</h2>
@@ -65,7 +65,7 @@ function Parking({ venueId, venueName, onSelect }) {
           );
         })}
       </section>
-    </main>
+    </section>
   );
 }
 

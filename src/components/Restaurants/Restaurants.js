@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
+function Restaurants({ venueId, venueName, onSelect, priceChoice, restoId }) {
     console.log("Venue Id from Itinerary Form to Restaurants: ", venueId); // remove this eventually
     console.log("Price Choice from Itinerary Form to Restaurants: ", priceChoice); // remove this eventually
     const [restoOptions, setRestoOptions] = useState([]);
     const [restoInfo, setRestoInfo] = useState([]);
-    const [selectedRestoId, setSelectedRestoId] = useState(null);
+    const [selectedRestoId, setSelectedRestoId] = useState(restoId);
 
     useEffect(() => {
         const fetchRestoOptions = async () => {
@@ -54,7 +54,7 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
     };
 
     return (
-        <main className='main'>
+        <section className='main'>
             <section className='restos__header-container'>
                 <h2 className='restos__header'>Restaurant Options near {venueName}</h2>
                 <h2 className='restos__subheader'>Please choose a restaurant</h2>
@@ -97,7 +97,7 @@ function Restaurants({ venueId, venueName, onSelect, priceChoice }) {
                 )
                 })}
             </section>
-        </main>
+        </section>
     )
 };
 
