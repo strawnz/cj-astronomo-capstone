@@ -3,6 +3,10 @@
 .completed {
     &__header-container {
         padding: 1.25rem 1rem;
+
+        @include desktop {
+            padding: 2rem 38rem 0 47.75rem;
+        }
     }
 
     &__header {
@@ -17,6 +21,10 @@
     &__itinerary-container {
         margin: 1rem 1.5rem;
         @include flex-column;
+
+        @include desktop {
+            padding: 2rem 37rem 0 48rem;
+        }
     }
 
     &__buttons {
@@ -37,6 +45,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include desktop {
+            width: 12%;
+            height: 3rem;
+        }
     }
 
     &__home:hover {
@@ -57,6 +70,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include desktop {
+            width: 12%;
+            height: 3rem;
+        }
     }
 
     &__back:hover {
@@ -74,6 +92,10 @@
         border-left: 2px solid $text-grey;
         position: relative;
         padding-bottom: 2rem;
+
+        @include desktop {
+            padding-bottom: 3rem;
+        }
     }
 
     &__final-dest {
@@ -113,7 +135,18 @@
 
     &__header {
         font-size: 0.9375rem;
-        margin-bottom: 0.25rem
+        margin-bottom: 0.25rem;
+
+        @include desktop {
+            margin-bottom: 0.5rem;
+        }
+
+        &--final {
+            @include desktop {
+                font-size: 1.125rem;
+                margin: 0.5rem 0;
+            }
+        }
     }
 
     &__subheader {
@@ -124,9 +157,14 @@
         @include body-med;
 
         &--sm {
-            font-size: 12px;
+            font-size: 0.75rem;
             line-height: 1.25rem;
             margin-top: 0.25rem;
+
+            @include desktop {
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+            }
         }
     }
 
@@ -135,5 +173,9 @@
         border: 2px solid $text-grey;
         border-radius: 10px;
         margin: 0.5rem 0;
+
+        @include desktop {
+            margin: 1rem 0;
+        }
     }
 }

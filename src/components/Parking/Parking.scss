@@ -2,7 +2,7 @@
 
 .parking {
     &__header-container {
-        padding: 1rem 0;
+        padding: 0;
     }
 
     &__header {
@@ -12,6 +12,10 @@
     &__subheader {
         @include subheader;
         margin-top: 1rem;
+    }
+
+    &__card-container {
+        margin-bottom: 2rem;
     }
 
     &__buttons {

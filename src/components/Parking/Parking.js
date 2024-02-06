@@ -35,7 +35,7 @@ function Parking({ venueId, venueName, onSelect, parkingId }) {
         <h2 className="parking__header">Parking Options near {venueName}</h2>
         <h2 className="parking__subheader">Please choose a parking lot</h2>
       </section>
-      <section>
+      <section className="parking__card-container">
         {parkingOptions.map((parking) => {
             const isSelected = parking.id === selectedParkingId; 
           return (
