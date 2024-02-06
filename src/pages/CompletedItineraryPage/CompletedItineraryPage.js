@@ -9,6 +9,8 @@ function CompletedItineraryPage() {
     const [timeAtResto, setTimeAtResto] = useState(null);
     const [parkingToRestoTime, setParkingToRestoTime] = useState(null);
     const [findParkingTime, setFindParkingTime] = useState(null);
+    const [parkingToVenueTime, setParkingToVenueTime] = useState(null);
+    const [findParkingNoRestoTime, setFindParkingNoRestoTime] = useState(null);
 
     useEffect(() => {
         const fetchLatestFormInfo = async () => {
@@ -76,6 +78,28 @@ function CompletedItineraryPage() {
         }
     }, [parkingToRestoTime]);
 
+    useEffect(() => {
+        if (latestFormInfo && latestFormInfo.latest_form) {
+            const calculateParkingToVenueTime = calculateTimeBackwards(
+                latestFormInfo.latest_form.preferred_time,
+                latestFormInfo.parking_info.duration_venue
+            );
+            console.log("Time from Parking to Venue: ", calculateParkingToVenueTime); // remove this eventually
+            setParkingToVenueTime(calculateParkingToVenueTime);
+        }
+    }, [latestFormInfo])
+
+    useEffect(() => {
+        console.log("Parking to Venue Time in useEffect: ", parkingToVenueTime);
+        if (parkingToVenueTime) {
+            const calculateFindParkingNoRestoTime = calculateTimeBackwards(
+                parkingToVenueTime, 5
+            );
+            console.log("Time to Find Parking (no resto): ", calculateFindParkingNoRestoTime);
+            setFindParkingNoRestoTime(calculateFindParkingNoRestoTime);
+        }
+    }, [parkingToVenueTime]);
+
     const formatTime = (timeString) => {
         const time = new Date(`2024-01-01T${timeString}`);
         return time.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit', hour12: true });
@@ -98,6 +122,7 @@ function CompletedItineraryPage() {
         const venueName = latestFormInfo.venue_info.venue_name;
         const venueAddress = latestFormInfo.venue_info.address;
         const venueDurationFromResto = latestFormInfo.resto_venue_info.duration_venue;
+        const venueDurationFromParking = latestFormInfo.parking_info.duration_venue;
         const venueImage = `http://localhost:8080${latestFormInfo.venue_info.image_path}`;
         const preferredTime = latestFormInfo.latest_form.preferred_time;
         const formId = latestFormInfo.latest_form.id;
@@ -115,7 +140,7 @@ function CompletedItineraryPage() {
                 </h2>
             </section>
             <section className='completed__itinerary-container'>
-                {optionalParking !== "no" && (
+                {optionalParking !== "no" && optionalRestaurant !== "no" && (
                 <>
                 <article className='itin__pit-stop'>
                     <div className='itin__dest-point'></div>
@@ -158,6 +183,27 @@ function CompletedItineraryPage() {
                     </div>
                 </article>
                 </>
+                )}
+                {optionalParking !== "no" && (
+                    <>
+                    <article className='itin__pit-stop'>
+                        <div className='itin__dest-point'></div>
+                        <div className='itin__content'>
+                            <h3 className='itin__header'>{formatTime(findParkingNoRestoTime)}</h3>
+                            <h4 className='itin__subheader'>Arrive at parking lot and find parking</h4>
+                            <p className='itin__info'>{parkingAddress}</p>
+                        </div>
+                    </article>
+                    <article className='itin__pit-stop'>
+                    <div className='itin__dest-point'></div>
+                    <div className='itin__content'>
+                        <h3 className='itin__header'>{formatTime(parkingToVenueTime)}</h3>
+                        <h4 className='itin__subheader'>Walk to {venueName}</h4>
+                        <p className='itin__info'>{venueAddress}</p>
+                        <p className='itin__info--sm'>Approximately {venueDurationFromParking} minutes</p>
+                    </div>
+                </article>
+                    </>
                 )}
                 <article className='itin__final-dest'>
                     <div className='itin__dest-point--final'></div>

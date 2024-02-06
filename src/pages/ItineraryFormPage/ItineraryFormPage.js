@@ -208,7 +208,7 @@ function ItineraryFormPage() {
             setTimeout(() => {
                 setShowSuccessMessage(false);
                 toCompletedItinerary("/completed");
-            }, 3500)
+            }, 3000)
 
         } catch (error) {
             console.log("Form submission error: ", error);
