@@ -35,7 +35,7 @@
 
 @mixin subheader {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.15rem;
     line-height: 1.5rem;
 
     @include desktop {
@@ -50,8 +50,8 @@
 }
 
 @mixin body-med {
-    font-size: 0.875rem;
-    line-height: 1.5rem;
+    font-size: 13.5px;
+    line-height: 1.65rem;
 
     @include desktop {
         font-size: 1rem;

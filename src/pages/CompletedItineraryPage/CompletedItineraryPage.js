@@ -17,6 +17,7 @@ function CompletedItineraryPage() {
             try {
                 const response = await axios.get(`
                 http://localhost:8080/api/forms/last-updated`);
+                console.log("Latest form info: ", response.data);
                 setLatestFormInfo(response.data);
             } catch (error) {
                 console.log("Error fetching latest form info: ", error);
@@ -50,13 +51,13 @@ function CompletedItineraryPage() {
     }, [restoToVenueTime]); 
 
     useEffect(() => {
-        if (timeAtResto) {
+        if (timeAtResto && latestFormInfo.parking_resto_info) {
             const calculateParkingToRestoTime = calculateTimeBackwards(
                 timeAtResto, latestFormInfo.parking_resto_info.duration_resto
             );
             setParkingToRestoTime(calculateParkingToRestoTime);
         }
-    }, [timeAtResto]);
+    }, [timeAtResto, latestFormInfo]);
 
     useEffect(() => {
         if (parkingToRestoTime) {

@@ -36,6 +36,8 @@ https://github.com/strawnz/cj-astronomo-capstone-api
 
 Once both repositories are downloaded locally, npm install the libraries below.
 
+Once the libraries are installed, in the server repository, change the '.env.sample' file name to '.env' and update the username and password with your personal info. Then in the Terminal, type "npm run migrate", followed by "npm run seed" to run the migration and seed files required for the MySQL database.
+
 ### Tech Stack
 
 - React
@@ -55,54 +57,22 @@ Once both repositories are downloaded locally, npm install the libraries below.
     - mysql2
     - knex
 
-### APIs
-
-- This project uses a custom API built in Express
-
 ### Sitemap
 
 - Home page
 - Build itinerary form
 - Completed itinerary
 
-### Mockups 
+### Screenshots 
 
-#### Home Page
-![screenshot of homepage](/src/assets/readme/HomePage.JPG)
+#### Home Page (at Desktop breakpoint)
+![screenshot of homepage](/src/assets/readme/HomePageDesktop.png)
 
-#### Build Itinerary Form Page
-![screenshot of build itinerary form page](/src/assets/readme/BuildItineraryForm.JPG)
+#### Build Itinerary Form Page (at Desktop breakpoint)
+![screenshot of build itinerary form page](/src/assets/readme/ItineraryFormPageDesktop.png)
 
-#### Parking Options Component (rendered on form page if 'Yes' is selected)
-![screenshot of parking options component](/src/assets/readme/ParkingOptions.JPG)
-
-#### Restaurant Options Component (rendered on form page if 'Yes' and a price level is selected)
-![screenshot of restaurant options component](/src/assets/readme/RestaurantOptions.JPG)
-
-#### Completed Itinerary Page
-![screenshot of completed itinerary page](/src/assets/readme/CompletedItineraryPage.JPG)
-
-### Data
-
-This project uses a custom database with 6 tables and multiple endpoints.
-
-Tables:
-    
-    - Venues: lists 10 of the most popular live event venues in Toronto
-
-    - Restaurants: includes restaurant details such as cuisine type, price level, website
-
-    - Restaurants/Venues: include distance and time information between each restaurant and a specific venue
-
-    - Parking: includes parking lot details such as address, distance and time information related to a specific venue
-
-    - Parking/Restaurants: includes distance and time information between each parking lot and a specific restaurant
-
-    - Forms: stores choices that the user selects when a form is submitted
-
-### Auth
-
-Currently N/A for the first version of this project
+#### Completed Itinerary Page (at Desktop breakpoint)
+![screenshot of completed itinerary page](/src/assets/readme/CompletedItineraryPageDesktop.png)
 
 ### Usage
 
@@ -131,6 +101,32 @@ Please note that the database is still a work in progress. To successfully use t
     - You will also have the option to change your answers in the form (currently needs further debugging)
     - You also have the option to return to the Home page
 
+### APIs
+
+- This project uses a custom API built in Express
+
+### Data
+
+This project uses a custom database with 6 tables and multiple endpoints.
+
+Tables:
+    
+    - Venues: lists 10 of the most popular live event venues in Toronto
+
+    - Restaurants: includes restaurant details such as cuisine type, price level, website
+
+    - Restaurants/Venues: include distance and time information between each restaurant and a specific venue
+
+    - Parking: includes parking lot details such as address, distance and time information related to a specific venue
+
+    - Parking/Restaurants: includes distance and time information between each parking lot and a specific restaurant
+
+    - Forms: stores choices that the user selects when a form is submitted
+
+### Auth
+
+Currently N/A for the first version of this project
+
 ## Lessons Learned
 
 I have learned many things while trying to execute the first sprint in this ambitious project within a limited amount of time. 
@@ -146,7 +142,7 @@ Some of the key takeaways include:
 
 ## Next Steps
 
-- Continue fleshing out the database (goal to complete by Demo Day)
+- Continue fleshing out the database
 - Incorporate Google Maps API so a user can select any venue of their choosing
 - Sync itinerary to a user's calendar 
 - Ability to share the itinerary with other people's calendars or via a link
