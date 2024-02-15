@@ -144,44 +144,52 @@
             border-radius: 0.5rem;
             margin: 1rem 0;
             padding-left: 0.5rem;
-        }
 
-        .react-time-picker__inputGroup__input {
-            width: 80%;
-        }
+            &__input {
+                width: 80%;
+            }
 
-        .react-time-picker__inputGroup__hour {
-            color: black;
-            font-family: 'Raleway';
-            font-weight: 600;
-            @include body-med;
-        }
+            &__hour {
+                color: black;
+                font-family: 'Raleway';
+                font-weight: 600;
+                @include body-med;
+            }
 
-        .react-time-picker__inputGroup__hour::placeholder  {
-            color: black;
-            font-family: 'Raleway';
-            font-weight: 600;
-        }
+            &__hour::placeholder {
+                color: black;
+                font-family: 'Raleway';
+                font-weight: 600;
+            }
 
-        .react-time-picker__inputGroup__minute {
-            color: black;
-            font-family: 'Raleway';
-            font-weight: 600;
-            @include body-med;
-        }
+            &__divider {
+                color: black;
+                font-family: 'Raleway';
+                font-weight: 800;
+                @include body-med;
+            }
 
-        .react-time-picker__inputGroup__minute::placeholder  {
-            color: black;
-            font-family: 'Raleway';
-            font-weight: 600;
-        }
+            &__minute {
+                @extend .react-time-picker__inputGroup__hour;
+            }
 
-        .react-time-picker__inputGroup__amPm {
-            width: 10%;
-            text-align: center;
-            color: black;
-            font-family: 'Raleway';
-            font-weight: 600;
+            &__minute::placeholder {
+                color: black;
+                font-family: 'Raleway';
+                font-weight: 600;
+            }
+
+            &__amPm {
+                width: 20%;
+                text-align: center;
+                color: black;
+                font-family: 'Raleway';
+                font-weight: 600;
+            }
+
+            &__leadingZero {
+                @extend .react-time-picker__inputGroup__hour;
+            }
         }
     }
 }
